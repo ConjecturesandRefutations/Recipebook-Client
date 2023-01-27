@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from "axios";
 
 const API_URL = "http://localhost:5005";
@@ -8,6 +8,7 @@ const API_URL = "http://localhost:5005";
 function RecipeDetailsPage (props) {
   const [recipe, setRecipe] = useState(null);
   const { recipeId } = useParams();
+  const navigate = useNavigate();
   
   const getRecipe = () => {
     axios
@@ -24,6 +25,15 @@ function RecipeDetailsPage (props) {
     getRecipe();
   }, [] );
 
+  const deleteRecipe = () => {
+    
+    axios
+      .delete(`${API_URL}/api/recipes/${recipeId}`)
+      .then(() => {
+        navigate("/recipes");
+      })
+      .catch((err) => console.log(err));
+  }; 
   
   return (
     <div className="RecipeDetails">
@@ -35,13 +45,11 @@ function RecipeDetailsPage (props) {
         </>
       )}
 
-      <Link to="/recipes">
-        <button>Back to Recipes</button>
-      </Link>
-          
       <Link to={`/recipes/edit/${recipeId}`}>
         <button>Edit Recipe</button>
       </Link>
+
+      <button onClick={deleteRecipe} id='deleteRecipe'>Delete Recipe</button>
       
     </div>
   );

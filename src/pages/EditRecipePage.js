@@ -34,19 +34,7 @@ function EditRecipePage(props) {
         navigate(`/recipes/${recipeId}`)
       });
   };
-  
-  
-  const deleteRecipe = () => {
-    
-    axios
-      .delete(`${API_URL}/api/recipes/${recipeId}`)
-      .then(() => {
-        navigate("/recipes");
-      })
-      .catch((err) => console.log(err));
-  };  
 
-  
   return (
     <div className="EditRecipePage">
       <h3>Edit the Recipe</h3>
@@ -69,8 +57,6 @@ function EditRecipePage(props) {
 
         <button type="submit">Update Recipe</button>
       </form>
-
-      <button onClick={deleteRecipe}>Delete Recipe</button>
     </div>
   );
 }

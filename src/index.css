@@ -60,8 +60,8 @@ textarea {
 } 
 
 .EditRecipePage,
-.AddRecipe,
-.AddTask {
+.AddRecipe
+{
   background: #ffd2ec;
   border: 1px solid grey;
   box-shadow: 0px 2px 3px grey;
@@ -85,3 +85,11 @@ textarea {
   align-items: center;
 }
 
+#deleteRecipe{
+  background-color: red;
+}
+
+#recipeCard{
+  border: 1px solid grey;
+  box-shadow: 0px 2px 3px grey;
+}
