@@ -9,6 +9,7 @@ const API_URL = "http://localhost:5005";
 
 function RecipeListPage() {
   const [recipes, setRecipes] = useState([]);
+  const [displayForm, setDisplayForm] = useState(false)
 
   const getAllRecipes = () => {
     axios
@@ -27,7 +28,9 @@ function RecipeListPage() {
   return (
     <div className="RecipeListPage">
       
-      <AddRecipe refreshRecipes={getAllRecipes} />
+      <button onClick={()=> setDisplayForm(!displayForm)} id='showFormToggle'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
+      {displayForm && <AddRecipe refreshRecipes={getAllRecipes} />}
+      
       
       <Row style={{ width: '100%', justifyContent: 'center' }}>
       { recipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
