@@ -6,7 +6,7 @@ function HomePage() {
 
     return (
       <div className={'HomePage ' + theme}>
-        <h1>Recipebook</h1>
+        <h1 >Recipebook</h1>
       </div>
     );
   }

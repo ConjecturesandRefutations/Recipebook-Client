@@ -3,19 +3,19 @@
 }
 
 body {
-  margin: 0;
+  margin: 0px
 }
 
 a {
   list-style: none;
-  color: black;
+  /* color: black; */
 }
 
 button,
 select {
   padding: 3px 8px;
   min-width: 50px;
-  margin: 5px;
+  margin: 5px; 
   font-size: 18px;
   border-radius: 5px;
   border-style: none;
@@ -30,7 +30,7 @@ button:hover{
 
 label {
   width: 200px;
-  display: block;
+  display: block; 
 }
 
 input,
@@ -38,17 +38,7 @@ textarea {
   width: 200px;
   padding: 10px;
   display: inline-block;
-  margin: 10px;
-}
-
-.Navbar {
-  background: #515f7d;
-  color: white;
-  padding: 0px 20px;
-  box-shadow: 0px 1px 2px gray;
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 5px;
+  margin: 10px;  
 }
 
 .Navbar li {
@@ -71,15 +61,13 @@ textarea {
   width: 400px;
   text-align: center;
   margin: 0 auto;
-  margin-bottom: 20px;
-  padding: 10px;
-  border-radius: 4px;
-  margin-top: 10px;
+  margin-bottom: 0px;
 }
 
 .AddRecipe{
   border: 1px solid grey;
   box-shadow: 0px 2px 3px grey;
+  border-radius: 4px;
 }
 
 .EditRecipePage form,
@@ -87,6 +75,7 @@ textarea {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 0px;
 }
 
 #deleteRecipe{
@@ -100,6 +89,7 @@ textarea {
   border: 1px solid grey;
   box-shadow: 0px 2px 3px grey;
   color: black;
+  background-color: whitesmoke;
 }
 
 #recipeCard:hover {
@@ -127,10 +117,13 @@ textarea {
  
 .Navbar.light {
   background-color: pink;
+  box-shadow: 1px 1px 2px rgb(143, 115, 219);
 }
  
 .Navbar.dark {
   background-color: #252526;
+  box-shadow: 1px 1px 2px rgb(255, 200, 200);
+  padding-bottom: 20px;
 }
 
 .light a,
@@ -145,6 +138,7 @@ textarea {
 .dark h1,
 .dark h2 {
   color: #ffffff;
+  margin-top: 0px;
 }
 
 .HomePage{
@@ -159,19 +153,15 @@ textarea {
   height: 100vh;
 }
 
-#toggleTheme{
-  background-color: whitesmoke;
-  margin-left: 1000px;
-}
-
 #sunMoon{
   width: 20px;
   height: 20px;
 }
 
 .EditRecipePage {
-  height: 100vh;
+  height: 100vh; 
   width: 1330px;
+  padding-right: 20px;
 }
 
 .EditRecipeForm { 
@@ -184,3 +174,24 @@ textarea {
   border-radius: 5px;
 }
 
+.selected {
+  text-shadow: 1px 0px 3px white;
+  color: white;
+  border-bottom: white solid 2px;
+  padding-bottom: 5px;
+}
+
+.selected button{
+ color: white;
+}
+
+#darkToggle{
+  background-color: whitesmoke;
+  margin-left: 1000px;
+}
+
+#lightToggle{
+  background-color: black;
+  margin-left: 1000px;
+  color: white;
+}
