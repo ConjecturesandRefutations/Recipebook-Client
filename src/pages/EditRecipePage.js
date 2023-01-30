@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
 
+import { useContext } from 'react'; 
+import { ThemeContext } from './../context/theme.context'; 
+
 const API_URL = "http://localhost:5005";
 
 function EditRecipePage(props) {
@@ -10,6 +13,8 @@ function EditRecipePage(props) {
   
   const { recipeId } = useParams();
   const navigate = useNavigate();
+
+  const { theme } = useContext(ThemeContext);
   
   useEffect(() => {
     axios
@@ -36,10 +41,10 @@ function EditRecipePage(props) {
   };
 
   return (
-    <div className="EditRecipePage">
-      <h3>Edit the Recipe</h3>
+    <div className={'EditRecipePage ' + theme}>
+      <h2>Edit the Recipe</h2>
 
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} className='EditRecipeForm' >
         <label>Name:</label>
         <input
           type="text"

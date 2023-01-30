@@ -8,7 +8,7 @@ function RecipeCard ( { name, instructions, _id } ) {
     <div className="RecipeCard">
       <Col id='table'>
       <Link to={`/recipes/${_id}`}>
-        <Card id="recipeCard" style={{ width: 230, height: 300, margin: 10 }}>
+        <Card id="recipeCard">
         <h3>{name}</h3>
       <p>{instructions} </p>
       </Card>

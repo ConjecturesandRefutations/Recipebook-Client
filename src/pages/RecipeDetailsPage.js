@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from "axios";
 
+import { useContext } from 'react'; 
+import { ThemeContext } from './../context/theme.context'; 
+
 const API_URL = "http://localhost:5005";
 
 
@@ -9,6 +12,8 @@ function RecipeDetailsPage (props) {
   const [recipe, setRecipe] = useState(null);
   const { recipeId } = useParams();
   const navigate = useNavigate();
+
+  const { theme } = useContext(ThemeContext);
   
   const getRecipe = () => {
     axios
@@ -36,7 +41,7 @@ function RecipeDetailsPage (props) {
   }; 
   
   return (
-    <div className="RecipeDetails">
+    <div className={"RecipeDetails " + theme}>
     
       {recipe && (
         <>

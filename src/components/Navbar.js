@@ -1,16 +1,32 @@
-import { Link } from "react-router-dom";
+ 
+import { NavLink } from 'react-router-dom';
+ 
+import { useContext } from 'react'; // <== ADD
+import { ThemeContext } from './../context/theme.context'; 
+
+import sunMoon from './../images/sunMoon.jpg'
 
 function Navbar() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   return (
-    <nav>
-      <Link to="/">
+    <div>
+    <nav nav className={'Navbar ' + theme}>
+      <NavLink to="/">
         <button>Home</button>
-      </Link>
+      </NavLink>
 
-      <Link to="/recipes">
+      <NavLink to="/recipes">
         <button>Recipes</button>
-      </Link>
+      </NavLink>
+
+      <button className="theme-btn" onClick={toggleTheme} id='toggleTheme'>
+        {theme === 'light' ? 'dark ' : 'light '}<img src={sunMoon} alt='sunMoon' id='sunMoon'/>
+      </button>
+
     </nav>
+
+    
+    </div>
   );
 }
 

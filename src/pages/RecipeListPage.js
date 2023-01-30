@@ -5,28 +5,33 @@ import { Row } from 'antd';
 import RecipeCard from "../components/RecipeCard";
 import AddRecipe from "../components/AddRecipe";
 
+import { useContext } from 'react'; 
+import { ThemeContext } from './../context/theme.context';
+
 const API_URL = "http://localhost:5005";
 
 function RecipeListPage() {
   const [recipes, setRecipes] = useState([]);
   const [displayForm, setDisplayForm] = useState(false)
 
+  const { theme } = useContext(ThemeContext);
+
   const getAllRecipes = () => {
+    
     axios
       .get(`${API_URL}/api/recipes`)
       .then((response) => setRecipes(response.data))
       .catch((error) => console.log(error));
   };
 
-  // We set this effect will run only once, after the initial render
-  // by setting the empty dependency array - []
   useEffect(() => {
     getAllRecipes();
   }, [] );
 
   
   return (
-    <div className="RecipeListPage">
+    
+    <div className={"RecipeListPage " + theme}>
       
       <button onClick={()=> setDisplayForm(!displayForm)} id='showFormToggle'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
       {displayForm && <AddRecipe refreshRecipes={getAllRecipes} />}

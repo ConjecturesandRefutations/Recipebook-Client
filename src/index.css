@@ -23,6 +23,11 @@ select {
   background-color: rgb(155, 155, 255);
 }
 
+button:hover{
+  transform: scale(1.07);
+  box-shadow: 0px 0px 10px lightblue;
+}
+
 label {
   width: 200px;
   display: block;
@@ -63,18 +68,18 @@ textarea {
 .AddRecipe
 {
   background: #ffd2ec;
-  border: 1px solid grey;
-  box-shadow: 0px 2px 3px grey;
   width: 400px;
   text-align: center;
   margin: 0 auto;
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 4px;
+  margin-top: 10px;
 }
 
-.EditRecipePage {
-  background-color: rgb(255, 106, 106);
+.AddRecipe{
+  border: 1px solid grey;
+  box-shadow: 0px 2px 3px grey;
 }
 
 .EditRecipePage form,
@@ -89,10 +94,93 @@ textarea {
 }
 
 #recipeCard{
+  width: 230px; 
+  height: 300px; 
+  margin: 10px;
   border: 1px solid grey;
   box-shadow: 0px 2px 3px grey;
+  color: black;
+}
+
+#recipeCard:hover {
+  background-color: rgb(255, 212, 227);
+  transform: scale(1.07);
+  box-shadow: 0px 0px 10px lightblue;
+}
+
+#table{
+  margin-top: 50px;
 }
 
 #showFormToggle{
-  background-color: rgb(196, 196, 255);
+  background-color: rgb(137, 207, 240);
+  margin-top: 50px;
 }
+
+.light {
+  background-color: white;
+}
+ 
+.dark {
+  background-color: #0e090fd3;
+}
+ 
+.Navbar.light {
+  background-color: pink;
+}
+ 
+.Navbar.dark {
+  background-color: #252526;
+}
+
+.light a,
+.light p,
+.light h1,
+.light h3 {
+  color: #000000;
+}
+ 
+.dark a,
+.dark p,
+.dark h1,
+.dark h2 {
+  color: #ffffff;
+}
+
+.HomePage{
+   height: 100vh; 
+}
+
+.RecipeListPage{
+  height: 100vh;
+}
+
+.RecipeDetails{
+  height: 100vh;
+}
+
+#toggleTheme{
+  background-color: whitesmoke;
+  margin-left: 1000px;
+}
+
+#sunMoon{
+  width: 20px;
+  height: 20px;
+}
+
+.EditRecipePage {
+  height: 100vh;
+  width: 1330px;
+}
+
+.EditRecipeForm { 
+  background-color: rgb(255, 106, 106);
+  margin-top: 10px; 
+  max-width: 400px;
+  margin-left: 460px;
+  border: 1px solid grey;
+  box-shadow: 0px 2px 3px grey;
+  border-radius: 5px;
+}
+
