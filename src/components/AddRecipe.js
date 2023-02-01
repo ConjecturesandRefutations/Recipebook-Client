@@ -13,9 +13,13 @@ function AddRecipe(props) {
     e.preventDefault();
 
     const requestBody = { name, instructions };
+
+    const storedToken = localStorage.getItem('authToken');
     
     axios
-      .post(`${API_URL}/api/recipes`, requestBody)
+      .post(`${API_URL}/api/recipes`, requestBody,
+      { headers: { Authorization: `Bearer ${storedToken}` } } 
+      )
       .then((response) => {
         // Reset the state
         setName("");

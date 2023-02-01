@@ -16,8 +16,11 @@ function RecipeDetailsPage (props) {
   const { theme } = useContext(ThemeContext);
   
   const getRecipe = () => {
+    const storedToken = localStorage.getItem('authToken');
     axios
-      .get(`${API_URL}/api/recipes/${recipeId}`)
+      .get(`${API_URL}/api/recipes/${recipeId}`,
+      { headers: { Authorization: `Bearer ${storedToken}` } }
+      )
       .then((response) => {
       	const oneRecipe = response.data;
       	setRecipe(oneRecipe);
@@ -31,9 +34,13 @@ function RecipeDetailsPage (props) {
   }, [] );
 
   const deleteRecipe = () => {
+
+    const storedToken = localStorage.getItem('authToken'); 
     
     axios
-      .delete(`${API_URL}/api/recipes/${recipeId}`)
+      .delete(`${API_URL}/api/recipes/${recipeId}`,
+      { headers: { Authorization: `Bearer ${storedToken}` } }  
+      )
       .then(() => {
         navigate("/recipes");
       })

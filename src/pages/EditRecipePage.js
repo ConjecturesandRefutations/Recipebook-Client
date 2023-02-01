@@ -17,8 +17,13 @@ function EditRecipePage(props) {
   const { theme } = useContext(ThemeContext);
   
   useEffect(() => {
+
+    const storedToken = localStorage.getItem('authToken');
     axios
-      .get(`${API_URL}/api/recipes/${recipeId}`)
+      .get(
+        `${API_URL}/api/recipes/${recipeId}`,
+      { headers: { Authorization: `Bearer ${storedToken}` } } 
+      )
       .then((response) => {
         const oneRecipe = response.data;
         setName(oneRecipe.name);
@@ -33,8 +38,12 @@ function EditRecipePage(props) {
     e.preventDefault();
     const requestBody = { name, instructions };
 
+    const storedToken = localStorage.getItem('authToken');  
+
     axios
-      .put(`${API_URL}/api/recipes/${recipeId}`, requestBody)
+      .put(`${API_URL}/api/recipes/${recipeId}`, requestBody,
+      { headers: { Authorization: `Bearer ${storedToken}` } } 
+      )
       .then((response) => {
         navigate(`/recipes/${recipeId}`)
       });

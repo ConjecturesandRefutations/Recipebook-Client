@@ -17,9 +17,12 @@ function RecipeListPage() {
   const { theme } = useContext(ThemeContext);
 
   const getAllRecipes = () => {
+
+    const storedToken = localStorage.getItem("authToken");
     
     axios
-      .get(`${API_URL}/api/recipes`)
+      .get(`${API_URL}/api/recipes`,
+      { headers: { Authorization: `Bearer ${storedToken}` } })
       .then((response) => setRecipes(response.data))
       .catch((error) => console.log(error));
   };
