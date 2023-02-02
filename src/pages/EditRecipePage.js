@@ -51,7 +51,7 @@ function EditRecipePage(props) {
 
   return (
     <div className={'EditRecipePage ' + theme}>
-      <h2>Edit the Recipe</h2>
+      <h2 id="editTitle">Edit the Recipe</h2>
 
       <form onSubmit={handleFormSubmit} className='EditRecipeForm' >
         <label>Name:</label>

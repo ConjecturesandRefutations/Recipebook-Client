@@ -10,7 +10,7 @@ import sunMoon from './../images/sunMoon.jpg'
 function Navbar() {
 
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const { isLoggedIn, /* user,  */logOutUser } = useContext(AuthContext);
+  const { isLoggedIn, logOutUser } = useContext(AuthContext);
 
 
   function changeToggleId(theme){

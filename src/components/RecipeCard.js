@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import { Card, Col } from 'antd';
 
-// We are deconstructing props object directly in the parentheses of the function
-function RecipeCard ( { name, instructions, _id } ) {
+function RecipeCard ( { name, imgUrl, _id } ) {
 
   return (
     <div className="RecipeCard">
@@ -10,7 +9,7 @@ function RecipeCard ( { name, instructions, _id } ) {
       <Link to={`/recipes/${_id}`}>
         <Card id="recipeCard">
         <h3>{name}</h3>
-      <p>{instructions} </p>
+        <img src={imgUrl} alt="recipe" height={200} id='recipePic'/>
       </Card>
       </Link>
       </Col>
