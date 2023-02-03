@@ -33,7 +33,7 @@ const createRecipe = (newRecipe) => {
 const exportedObject = {
   getRecipes,
   uploadImage,
-  createRecipe
+  createRecipe,
 };
 
 export default exportedObject;

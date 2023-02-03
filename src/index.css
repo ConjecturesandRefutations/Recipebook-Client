@@ -158,6 +158,7 @@ textarea {
 
 .RecipeListPage{
   height: 100vh;
+  padding-bottom: 500px;
 }
 
 .RecipeDetails{
@@ -282,3 +283,7 @@ margin-left: 900px;
   border-radius: 5px;
 }
 
+#searchBar{
+  width: 400px;
+  margin-right: 47px;
+}
