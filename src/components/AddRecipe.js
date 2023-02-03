@@ -3,12 +3,14 @@ import axios from "axios";
 import { Input } from 'antd';
 import service from "../api/service";
 
+
 const API_URL = "http://localhost:5005";
 
 function AddRecipe(props) {
   const [name, setName] = useState("");
   const [instructions, setInstructions] = useState("");
   const [imgUrl, setImgUrl] = useState("");
+  const { TextArea } = Input 
 
     // ******** this function handles the file upload ********
     const handleFileUpload = (e) => {
@@ -56,9 +58,11 @@ function AddRecipe(props) {
 
   return (
     <div className="AddRecipe">
-      <h3>Add Recipe</h3>
 
       <form onSubmit={handleSubmit}>
+
+      <h3>Add Recipe</h3>
+      
         <label>Name:</label>
         <Input
           type="text"
@@ -68,7 +72,7 @@ function AddRecipe(props) {
         />
 
         <label>Instructions:</label>
-        <textarea
+        <TextArea
           type="text"
           name="instructions"
           value={instructions}
@@ -76,7 +80,7 @@ function AddRecipe(props) {
         />
           
           <label>Photo (optional):</label>
-          <input type="file" onChange={(e) => handleFileUpload(e)} />
+          <Input type="file" onChange={(e) => handleFileUpload(e)}/>
 
         <button type="submit" id="submitRecipe">Submit</button>
       </form>

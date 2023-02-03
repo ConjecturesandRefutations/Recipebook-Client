@@ -25,8 +25,15 @@ select {
 
 button:hover{
   transform: scale(1.07);
-  box-shadow: 0px 0px 10px gray;
   color: whitesmoke;
+}
+
+.light button:hover{
+  box-shadow: 0px 0px 10px cornflowerblue;
+}
+
+.dark button:hover{
+  box-shadow: 0px 0px 10px pink;
 }
 
 label {
@@ -63,6 +70,11 @@ textarea {
   box-shadow: 0px 2px 3px grey;
   border-radius: 4px;
 }
+
+.AddRecipe:hover{
+  filter: drop-shadow(2px 2px 4px rgba(21, 120, 128, 0.5));
+}
+
 
 .EditRecipePage form,
 .AddRecipe form {
@@ -132,14 +144,17 @@ textarea {
   color: #000000;
   
 }
-
-
  
 .dark a,
 .dark p,
-.dark h2 {
+.dark h2,
+.dark span {
   color: #ffffff;
   margin-top: 0px;
+}
+
+.dark form{
+  background-color: #708090;
 }
 
 .dark h2{
@@ -255,7 +270,11 @@ margin-left: 900px;
 }
 
 .toggleThemeTwo{
-  margin-left: 800px;
+  margin-left: 400px;
+  display: flex;
+  flex-direction: row;
+  padding: 5px 5px;
+  min-width: 50px;
   }
 
 #authButtons{
@@ -273,6 +292,7 @@ margin-left: 900px;
   display: flex;
   flex-direction: row;
   margin-left: 100px;
+  margin-top: 6px;
 }
 
 .error-message{
@@ -286,4 +306,18 @@ margin-left: 900px;
 #searchBar{
   width: 400px;
   margin-right: 47px;
+}
+
+#back{
+  margin-top: 100px;
+  background-color: gray;
+}
+
+ #cutlery{
+ margin-left: 390px;
+ padding-top: 6px;
+} 
+
+.toggleButtons{
+  max-height: 30px;
 }

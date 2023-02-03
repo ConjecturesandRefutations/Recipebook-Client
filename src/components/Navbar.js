@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { ThemeContext } from './../context/theme.context'; 
 import { AuthContext } from "./../context/auth.context";
 
+import cutlery from './../images/cutlerynoback.png'
 import sunMoon from './../images/sunMoon.jpg'
 
 function Navbar() {
@@ -40,11 +41,13 @@ function Navbar() {
       </NavLink>
     </section>
 
+    <img src={cutlery} alt='cutlery' width={50} height={50} id='cutlery'/>
+
     <section className='toggleThemeTwo'>
-      <button onClick={toggleTheme} id={changeToggleId(theme)}>
+      <button onClick={toggleTheme} id={changeToggleId(theme)} className="toggleButtons">
         {theme === 'light' ? 'dark ' : 'light '}<img src={sunMoon} alt='sunMoon' id='sunMoon'/>
       </button>
-      <button onClick={logOutUser} className="logoutButton">Logout</button>
+      <button onClick={logOutUser} className="toggleButtons">Logout</button>
       </section>
 
       </div>

@@ -62,7 +62,11 @@ function RecipeDetailsPage (props) {
       </Link>
 
       <button onClick={deleteRecipe} id='deleteRecipe'>Delete Recipe</button>
-      
+      <br/>
+      <Link to={`/recipes`}>
+        <button id='back'>Back</button>
+      </Link>
+
     </div>
   );
 }

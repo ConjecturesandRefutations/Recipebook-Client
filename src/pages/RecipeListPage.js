@@ -33,6 +33,7 @@ function RecipeListPage() {
     getAllRecipes();
   }, [] );
 
+
      recipes = recipes.filter((recipe) => {
     return recipe.name.toLowerCase().includes(query.toLowerCase());
   });
@@ -45,10 +46,9 @@ function RecipeListPage() {
       <button onClick={()=> setDisplayForm(!displayForm)} id='showFormToggle'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
       {displayForm && <AddRecipe refreshRecipes={getAllRecipes} />}
       
-      <SearchBar setQueryProp={setQuery} />
+      <SearchBar setQueryProp={setQuery}/>
       
       <Row style={{ width: '100%', justifyContent: 'center' }}>
-     {/*  { filteredRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} */} 
       { recipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
       </Row>
        
