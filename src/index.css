@@ -238,15 +238,14 @@ textarea {
   padding-top: 20px;
 }
 
-.loginSignupForm{
+ .loginSignupForm{
   background-color: rgb(180, 148, 255);
   margin-top: 10px;  
   max-width: 400px;
-  margin-left: 460px;
   border: 1px solid grey;
   box-shadow: 0px 2px 3px grey;
   border-radius: 5px;
-}
+} 
 
 .loginSignupButton{
   background-color: gray;
@@ -270,7 +269,7 @@ margin-left: 900px;
 }
 
 .toggleThemeTwo{
-  margin-left: 400px;
+  margin-left: 800px;
   display: flex;
   flex-direction: row;
   padding: 5px 5px;
@@ -313,11 +312,31 @@ margin-left: 900px;
   background-color: gray;
 }
 
- #cutlery{
- margin-left: 390px;
- padding-top: 6px;
+
+ 
+ .cutlery{
+  position: absolute;
+ margin-left: 47vw;
+ margin-top: 3px;
 } 
 
 .toggleButtons{
   max-height: 30px;
+}
+
+#loginInput{
+  float: right;
+  margin-right: 300px;
+  width: 274px;
+}
+
+#signupInput{
+  float: right;
+  margin-right: 300px;
+ 
+}
+
+.logo{
+  margin-top: 50px;
+  border-radius: 5px;
 }

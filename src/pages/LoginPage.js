@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./../context/auth.context";
 import { Input } from 'antd';
 import { ThemeContext } from './../context/theme.context';
+import lightLogo from '../images/lightLogo.png'
+import darkLogo from '../images/darkLogo.png'
 
 const API_URL = "http://localhost:5005";
 
@@ -22,6 +24,14 @@ function LoginPage(props) {
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
 
+  function changeLogoSrc(theme){
+    if (theme === 'dark'){
+      return darkLogo
+    } else {
+       return lightLogo
+    }
+};
+
   
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +39,7 @@ function LoginPage(props) {
 
     axios.post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
-        console.log("JWT token", response.data.authToken);
+        /* console.log("JWT token", response.data.authToken); */
         
         storeToken(response.data.authToken);
         authenticateUser();
@@ -43,6 +53,8 @@ function LoginPage(props) {
   
   return (
     <div className={"loginPage " + theme}>
+
+      <div id="loginInput">
       <h1>Login</h1>
 
       <form onSubmit={handleLoginSubmit} className='loginSignupForm'>
@@ -58,6 +70,9 @@ function LoginPage(props) {
 
       <p className="redirectMessages">Don't have an account yet?</p>
       <Link to={"/signup"}> Sign Up</Link>
+      </div>
+
+      <img src={changeLogoSrc(theme)} alt="recipeLogo" className="logo"/>
     </div>
   )
 }

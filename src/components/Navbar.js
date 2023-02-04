@@ -22,6 +22,7 @@ function Navbar() {
       }
   };
 
+
   return (
     <div>
 
@@ -41,7 +42,7 @@ function Navbar() {
       </NavLink>
     </section>
 
-    <img src={cutlery} alt='cutlery' width={50} height={50} id='cutlery'/>
+    <img src={cutlery} alt='cutlery' width={50} height={50} className='cutlery'/>
 
     <section className='toggleThemeTwo'>
       <button onClick={toggleTheme} id={changeToggleId(theme)} className="toggleButtons">
@@ -61,6 +62,8 @@ function Navbar() {
           <NavLink to="/signup" className={({ isActive }) => isActive ? "selected" : ""}> <button>Sign Up</button> </NavLink>
           <NavLink to="/login" className={({ isActive }) => isActive ? "selected" : ""}> <button>Login</button> </NavLink>
           </section>
+
+          <img src={cutlery} alt='cutlery' width={50} height={50} className='cutlery'/>
 
       <section className='toggleTheme'>
         <button onClick={toggleTheme} id={changeToggleId(theme)}>

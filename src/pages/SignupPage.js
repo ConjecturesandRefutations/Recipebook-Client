@@ -5,6 +5,9 @@ import { useContext } from 'react';
 import { ThemeContext } from './../context/theme.context';
 import axios from "axios";
 
+import lightLogo from '../images/lightLogo.png'
+import darkLogo from '../images/darkLogo.png'
+
 
 const API_URL = "http://localhost:5005";
 
@@ -23,6 +26,14 @@ function SignupPage(props) {
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
+
+  function changeLogoSrc(theme){
+    if (theme === 'dark'){
+      return darkLogo
+    } else {
+       return lightLogo
+    }
+};
 
   
   const handleSignupSubmit = (e) => {
@@ -46,6 +57,8 @@ function SignupPage(props) {
   
   return (
     <div className={"signupPage " + theme}>
+
+<div id="signupInput">
       <h1>Sign Up</h1>
 
       <form onSubmit={handleSignupSubmit} className='loginSignupForm'>
@@ -65,6 +78,8 @@ function SignupPage(props) {
 
       <p className="redirectMessages">Already have account?</p>
       <Link to={"/login"}> Login</Link>
+    </div>
+    <img src={changeLogoSrc(theme)} alt="recipeLogo" className="logo"/>
     </div>
   )
 }
