@@ -2,6 +2,7 @@ import React from 'react'
 import { Input } from 'antd';
 
 function SearchBar(props) {
+
     const handleInput = event => {
 		props.setQueryProp(event.target.value)
 	}
@@ -10,7 +11,8 @@ function SearchBar(props) {
     <div className='SearchBar'>
        <span>Search</span>
 		<Input type="text" onChange={handleInput} id='searchBar'/>
-    </div>
+	
+      </div>
 	)
 }
 

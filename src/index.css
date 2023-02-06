@@ -298,7 +298,6 @@ margin-left: 900px;
   padding: 5px;
   background-color: red;
   max-width: 350px;
-  margin-left: 482px;
   border-radius: 5px;
 }
 
@@ -326,17 +325,42 @@ margin-left: 900px;
 
 #loginInput{
   float: right;
-  margin-right: 300px;
+  margin-right: 275px;
   width: 274px;
 }
 
 #signupInput{
   float: right;
-  margin-right: 300px;
+  margin-right: 275px;
  
 }
 
 .logo{
   margin-top: 50px;
+  margin-right: 10px;
   border-radius: 5px;
+}
+
+.errorPage{
+  height: 100vh;
+  padding-top: 10px;
+}
+
+.veganVegetarianFilters{
+  display: flex;
+  flex-direction: row;
+  max-width: 300px;
+}
+
+.checkboxEdit{
+  display: flex;
+  flex-direction: row;
+}
+
+.veggieCheckboxes{
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  margin-left: 34vw;
+  color: green;
 }
