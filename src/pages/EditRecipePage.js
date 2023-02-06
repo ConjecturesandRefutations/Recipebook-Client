@@ -10,6 +10,9 @@ const API_URL = "http://localhost:5005";
 function EditRecipePage(props) {
   const [name, setName] = useState("");
   const [instructions, setInstructions] = useState("");
+  const [isVegetarian, setIsVegetarian] = useState(false);
+  const [isVegan, setIsVegan] = useState(false);
+
   
   const { recipeId } = useParams();
   const navigate = useNavigate();
@@ -28,6 +31,8 @@ function EditRecipePage(props) {
         const oneRecipe = response.data;
         setName(oneRecipe.name);
         setInstructions(oneRecipe.instructions);
+        setIsVegetarian(oneRecipe.isVegetarian);
+        setIsVegan(oneRecipe.isVegan);
       })
       .catch((error) => console.log(error));
     
@@ -36,7 +41,7 @@ function EditRecipePage(props) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const requestBody = { name, instructions };
+    const requestBody = { name, instructions, isVegetarian, isVegan };
 
     const storedToken = localStorage.getItem('authToken');  
 
@@ -68,6 +73,28 @@ function EditRecipePage(props) {
           value={instructions}
           onChange={(e) => setInstructions(e.target.value)}
         />
+
+<section className="checkboxEdit">
+<div>
+<input
+    type="checkbox"
+    checked={isVegetarian}
+    onChange={(e) => setIsVegetarian(e.target.checked)}
+    name="isVegetarian"
+  />
+
+    <label>Vegetarian</label>
+  </div>
+  <div>
+  <input
+    type="checkbox"
+    checked={isVegan}
+    onChange={(e) => setIsVegan(e.target.checked)}
+    name="isVegan"
+  />
+    <label>Vegan</label>
+  </div>
+  </section>
 
         <button type="submit">Update Recipe</button>
       </form>

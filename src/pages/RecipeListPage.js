@@ -16,6 +16,10 @@ function RecipeListPage() {
   const [displayForm, setDisplayForm] = useState(false)
   const [query, setQuery] = useState('');
 
+  const [isVegan, setIsVegan] = useState(false);
+  const [isVegetarian, setIsVegetarian] = useState(false);
+
+
   const { theme } = useContext(ThemeContext);
 
   const getAllRecipes = () => {
@@ -33,11 +37,11 @@ function RecipeListPage() {
     getAllRecipes();
   }, [] );
 
-
-  recipes = recipes.filter((recipe) => {
-  return recipe.name.toLowerCase().includes(query.toLowerCase());
+  const filteredRecipes = recipes.filter((recipe) => {
+    return recipe.name.toLowerCase().includes(query.toLowerCase())
+      && (!isVegetarian || recipe.isVegetarian || recipe.isVegan)
+      && (!isVegan || recipe.isVegan);
   });
-
   
   return (
     
@@ -47,11 +51,31 @@ function RecipeListPage() {
       {displayForm && <AddRecipe refreshRecipes={getAllRecipes} />}
       
       <SearchBar setQueryProp={setQuery}/>
-      
+
+      <section className="veggieCheckboxes">
+      <label>
+        Vegan:
+        <input
+          type="checkbox"
+          checked={isVegan}
+          onChange={(event) => setIsVegan(event.target.checked)}
+        />
+      </label>
+      <br />
+      <label>
+        Vegetarian:
+        <input
+          type="checkbox"
+          checked={isVegetarian}
+          onChange={(event) => setIsVegetarian(event.target.checked)}
+        />
+      </label>
+      </section>
+
       <Row style={{ width: '100%', justifyContent: 'center' }}>
-      { recipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
+      { filteredRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
       </Row>
-       
+
     </div>
   );
 }

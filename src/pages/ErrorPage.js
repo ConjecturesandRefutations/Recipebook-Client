@@ -1,6 +1,12 @@
+import { useContext } from "react";
+import { ThemeContext } from './../context/theme.context';
+
 function ErrorPage () {
+
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <div className="main">
+    <div className={"errorPage " + theme}>
       
       <h4>This is the Error page. </h4>
 

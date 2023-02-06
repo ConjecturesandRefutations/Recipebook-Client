@@ -10,12 +10,15 @@ function AddRecipe(props) {
   const [name, setName] = useState("");
   const [instructions, setInstructions] = useState("");
   const [imgUrl, setImgUrl] = useState("");
+  const [isVegan, setIsVegan] = useState(false);
+  const [isVegetarian, setIsVegetarian] = useState(false);
   const { TextArea } = Input 
 
     // ******** this function handles the file upload ********
     const handleFileUpload = (e) => {
-       console.log("The file to be uploaded is: ", e.target.files[0]);
+       /* console.log("The file to be uploaded is: ", e.target.files[0]); */
     
+       e.preventDefault();
   
       const uploadData = new FormData();
       
@@ -37,7 +40,7 @@ function AddRecipe(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const requestBody = { name, instructions, imgUrl };
+    const requestBody = { name, instructions, imgUrl, isVegetarian, isVegan };
 
     const storedToken = localStorage.getItem('authToken');
     
@@ -50,6 +53,8 @@ function AddRecipe(props) {
         setName("");
         setInstructions("");
         setImgUrl("");
+        setIsVegetarian(false)
+        setIsVegan(false)
         props.refreshRecipes();
       })
       .catch((error) => console.log(error));
@@ -81,6 +86,30 @@ function AddRecipe(props) {
           
           <label>Photo (optional):</label>
           <Input type="file" onChange={(e) => handleFileUpload(e)}/>
+
+
+      <section className="veganVegetarianFilters">
+          <label>
+        Vegetarian:
+        </label>
+        <input
+          type="checkbox"
+          checked={isVegetarian}
+          onChange={(event) => setIsVegetarian(event.target.checked)}
+          />
+  
+
+          <label>
+        Vegan:
+        </label>
+        <input
+          type="checkbox"
+          checked={isVegan}
+          onChange={(event) => setIsVegan(event.target.checked)}
+        />
+    </section>
+     
+      <br /> 
 
         <button type="submit" id="submitRecipe">Submit</button>
       </form>
