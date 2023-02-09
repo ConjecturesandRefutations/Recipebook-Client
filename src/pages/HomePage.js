@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { ThemeContext } from './../context/theme.context'; 
 import { AuthContext } from "./../context/auth.context";
 import React from "react";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const { theme } = useContext(ThemeContext);
@@ -48,6 +49,7 @@ function HomePage() {
       <div className={'HomePage ' + theme}>
         <h1 id='title'>Recipebook</h1>
         <p id='welcome'>Hello {user && user.name}!</p>
+        <Link to={"/recipes/user/:recipeId"}>Profile Page</Link>
         <canvas id='canvas' height={250}></canvas>
       </div>
     );
