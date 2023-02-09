@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Row } from 'antd';
+import { Row, Select } from 'antd';
 
 import RecipeCard from "../components/RecipeCard";
 import AddRecipe from "../components/AddRecipe";
@@ -18,7 +18,7 @@ function RecipeListPage() {
 
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
-
+  const [courseType, setCourseType] = useState('');
 
   const { theme } = useContext(ThemeContext);
 
@@ -40,7 +40,8 @@ function RecipeListPage() {
   const filteredRecipes = recipes.filter((recipe) => {
     return recipe.name.toLowerCase().includes(query.toLowerCase())
       && (!isVegetarian || recipe.isVegetarian || recipe.isVegan)
-      && (!isVegan || recipe.isVegan);
+      && (!isVegan || recipe.isVegan)
+      && (courseType === '' || recipe.courseType === courseType);
   });
   
   return (
@@ -52,22 +53,38 @@ function RecipeListPage() {
       
       <SearchBar setQueryProp={setQuery}/>
 
+      <section className="courseTypeFilter">
+      <p>Course Type:</p>
+        <Select
+          value={courseType}
+          onChange={(value) => setCourseType(value)}
+          style={{ width: 200 }}
+        >
+          <Select.Option value="">All</Select.Option>
+          <Select.Option value="Starter">Starter</Select.Option>
+          <Select.Option value="Main">Main</Select.Option>
+          <Select.Option value="Dessert">Dessert</Select.Option>
+          <Select.Option value="Snack">Snack</Select.Option>
+          <Select.Option value="Other">Other</Select.Option>
+        </Select>
+      </section>
+
       <section className="veggieCheckboxes">
-      <label>
-        Vegan:
-        <input
-          type="checkbox"
-          checked={isVegan}
-          onChange={(event) => setIsVegan(event.target.checked)}
-        />
-      </label>
-      <br />
       <label>
         Vegetarian:
         <input
           type="checkbox"
           checked={isVegetarian}
           onChange={(event) => setIsVegetarian(event.target.checked)}
+        />
+      </label>
+      <br />
+      <label>
+        Vegan:
+        <input
+          type="checkbox"
+          checked={isVegan}
+          onChange={(event) => setIsVegan(event.target.checked)}
         />
       </label>
       </section>
