@@ -12,7 +12,8 @@ function EditRecipePage(props) {
   const [instructions, setInstructions] = useState("");
   const [isVegetarian, setIsVegetarian] = useState(false);
   const [isVegan, setIsVegan] = useState(false);
-
+  const [courseType, setCourseType] = useState("");
+  const courseTypes = ["Starter", "Main", "Dessert","Snack", "Other"] 
   
   const { recipeId } = useParams();
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ function EditRecipePage(props) {
         setInstructions(oneRecipe.instructions);
         setIsVegetarian(oneRecipe.isVegetarian);
         setIsVegan(oneRecipe.isVegan);
+        setCourseType(oneRecipe.courseType);
       })
       .catch((error) => console.log(error));
     
@@ -41,7 +43,7 @@ function EditRecipePage(props) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const requestBody = { name, instructions, isVegetarian, isVegan };
+    const requestBody = { name, instructions, isVegetarian, isVegan, courseType };
 
     const storedToken = localStorage.getItem('authToken');  
 
@@ -73,6 +75,15 @@ function EditRecipePage(props) {
           value={instructions}
           onChange={(e) => setInstructions(e.target.value)}
         />
+
+<section className="selectCourseType">
+<label>Course Type:</label>
+<select value={courseType} onChange={(e) => setCourseType(e.target.value)}>
+  {courseTypes.map((courseTypeOption, index) => (
+    <option key={index} value={courseTypeOption}>{courseTypeOption}</option>
+  ))}
+</select>
+</section>
 
 <section className="checkboxEdit">
 <div>

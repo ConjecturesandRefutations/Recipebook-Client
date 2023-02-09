@@ -2,8 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 import { Input } from 'antd';
 import service from "../api/service";
+import { Select } from 'antd';
 
 
+const { Option } = Select;
 const API_URL = "http://localhost:5005";
 
 function AddRecipe(props) {
@@ -12,6 +14,7 @@ function AddRecipe(props) {
   const [imgUrl, setImgUrl] = useState("");
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
+  const [courseType, setCourseType] = useState("");
   const { TextArea } = Input 
 
     // ******** this function handles the file upload ********
@@ -40,7 +43,7 @@ function AddRecipe(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const requestBody = { name, instructions, imgUrl, isVegetarian, isVegan };
+    const requestBody = { name, instructions, imgUrl, isVegetarian, isVegan, courseType };
 
     const storedToken = localStorage.getItem('authToken');
     
@@ -55,6 +58,7 @@ function AddRecipe(props) {
         setImgUrl("");
         setIsVegetarian(false)
         setIsVegan(false)
+        setCourseType("");
         props.refreshRecipes();
       })
       .catch((error) => console.log(error));
@@ -83,6 +87,18 @@ function AddRecipe(props) {
           value={instructions}
           onChange={(e) => setInstructions(e.target.value)}
         />
+
+<label>Course Type:</label>
+      <Select
+        value={courseType}
+        onChange={(value) => setCourseType(value) } style={{ width: 400 }}
+      >
+        <Option value="Starter">Starter</Option>
+        <Option value="Main">Main</Option>
+        <Option value="Dessert">Dessert</Option>
+        <Option value="Snack">Snack</Option>
+      </Select>
+      <br />
           
           <label>Photo (optional):</label>
           <Input type="file" onChange={(e) => handleFileUpload(e)}/>
