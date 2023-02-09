@@ -49,7 +49,7 @@ function HomePage() {
       <div className={'HomePage ' + theme}>
         <h1 id='title'>Recipebook</h1>
         <p id='welcome'>Hello {user && user.name}!</p>
-        <Link to={"/recipes/user/:recipeId"}>Profile Page</Link>
+        <Link to={"/recipes/user/:userId"}>Profile Page</Link>
         <canvas id='canvas' height={250}></canvas>
       </div>
     );
