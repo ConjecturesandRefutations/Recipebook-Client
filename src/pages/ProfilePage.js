@@ -9,7 +9,7 @@ import SearchBar from "../components/Search";
 import { AuthContext } from './../context/auth.context'
 import { ThemeContext } from './../context/theme.context'; 
 
-import defaultProfileImage from '../images/defaultProfile.jpg'
+import defaultProfileImage from '../images/defaultProfile.jpg';
 
 const API_URL = "http://localhost:5005";
 
