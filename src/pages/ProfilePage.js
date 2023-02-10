@@ -32,6 +32,7 @@ const getMyRecipes = () => {
 .get(`${API_URL}/api/recipes/user/${user._id}`,
 { headers: { Authorization: `Bearer ${storedToken}` } })
 .then((response) => {
+  console.log(response.data);
   setMyRecipes(response.data);
   })
     .catch((error) => console.log(error));
@@ -42,11 +43,13 @@ useEffect(() => {
 }, [] );
 
 const myFilteredRecipes = myRecipes.filter((recipe) => {
+  console.log(recipe.courseType)
   return recipe.name.toLowerCase().includes(query.toLowerCase())
     && (!isVegetarian || recipe.isVegetarian || recipe.isVegan)
     && (!isVegan || recipe.isVegan)
     && (courseType === '' || recipe.courseType === courseType);
 });
+
 
 return (
   <div className={'myRecipes ' + theme}>
@@ -56,9 +59,12 @@ return (
    <section className='profileMain'>
     <h2 className='myRecipesTitle'>My Recipes</h2>
 
+<div id='reCentering'>
     <button onClick={()=> setDisplayForm(!displayForm)} id='showFormToggleTwo'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
-      {displayForm && <AddRecipe refreshRecipes={getMyRecipes} />}
+      {displayForm && <AddRecipe refreshRecipes={getMyRecipes} /> }
+
       <SearchBar setQueryProp={setQuery}/>
+      </div>
 
       </section>
 
