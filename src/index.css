@@ -108,7 +108,7 @@ textarea {
   margin-top: 50px;
 }
 
-#showFormToggle{
+.showFormToggle{
   background-color: rgb(137, 207, 240);
   margin-top: 50px;
 }
@@ -253,6 +253,7 @@ textarea {
 
 #welcome{
   font-weight: bold;
+  margin-bottom: 5vh;
 }
 
 .redirectMessages{
@@ -370,4 +371,48 @@ margin-left: 900px;
 
 #recipePic{
   max-width: 10vw;
+}
+
+.profileButton{
+  float: left;
+  margin-left: 35vw;
+  background-color: pink;
+}
+
+.myRecipesTitle{
+  position: absolute;
+  margin-left: 45vw;
+}
+
+.allUsers{
+  margin-bottom: 0;
+}
+
+#navProfileButton{
+  max-height: 30px;
+}
+
+.recipesButton{
+  float: left;
+  margin-left: 3vw;
+  background-color: pink;
+}
+
+.randomButton{
+  float: left;
+  margin-left: 3vw;
+  background-color: pink;
+}
+
+#defaultProfilePic{
+  max-height: 20vh;
+  max-width: 20vw;
+  float: left;
+  margin-left: 10vw;
+  border-radius: 50%;
+}
+
+#showFormToggleTwo{
+  margin-top: 15vh;
+ margin-right: 19vw;
 }

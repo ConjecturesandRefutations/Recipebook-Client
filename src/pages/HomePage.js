@@ -1,6 +1,7 @@
 import { useContext } from 'react'; 
 import { ThemeContext } from './../context/theme.context'; 
 import { AuthContext } from "./../context/auth.context";
+import { Button } from 'antd';
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -49,7 +50,11 @@ function HomePage() {
       <div className={'HomePage ' + theme}>
         <h1 id='title'>Recipebook</h1>
         <p id='welcome'>Hello {user && user.name}!</p>
-        <Link to={"/recipes/user/:userId"}>Profile Page</Link>
+        <Link to={"/recipes/user/:userId"}><Button className='profileButton'>Profile Page</Button></Link>
+        <Link to={"/recipes/"}><Button className='recipesButton'>All Recipes</Button></Link>
+        <Button className='randomButton'>Need Inspiration?</Button>
+        <br/>
+        <br/>
         <canvas id='canvas' height={250}></canvas>
       </div>
     );

@@ -14,8 +14,9 @@ const API_URL = "http://localhost:5005";
 function RecipeListPage() {
   let [recipes, setRecipes] = useState([]);
   const [displayForm, setDisplayForm] = useState(false)
-  const [query, setQuery] = useState('');
 
+
+  const [query, setQuery] = useState('');
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
 
@@ -47,12 +48,24 @@ function RecipeListPage() {
     
     <div className={"RecipeListPage " + theme}>
       
-      <button onClick={()=> setDisplayForm(!displayForm)} id='showFormToggle'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
+            <h2 className="allUsers">All Users' Recipes</h2>
+
+      <button onClick={()=> setDisplayForm(!displayForm)} className='showFormToggle'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
       {displayForm && <AddRecipe refreshRecipes={getAllRecipes} />}
       
       <SearchBar setQueryProp={setQuery}/>
 
       <section className="veggieCheckboxes">
+
+      <label>
+        Vegetarian:
+        <input
+          type="checkbox"
+          checked={isVegetarian}
+          onChange={(event) => setIsVegetarian(event.target.checked)}
+        />
+      </label>
+      
       <label>
         Vegan:
         <input
@@ -62,14 +75,7 @@ function RecipeListPage() {
         />
       </label>
       <br />
-      <label>
-        Vegetarian:
-        <input
-          type="checkbox"
-          checked={isVegetarian}
-          onChange={(event) => setIsVegetarian(event.target.checked)}
-        />
-      </label>
+
       </section>
 
       <Row style={{ width: '100%', justifyContent: 'center' }}>
