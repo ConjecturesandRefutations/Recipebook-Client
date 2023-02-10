@@ -48,6 +48,8 @@ function RecipeListPage() {
     
     <div className={"RecipeListPage " + theme}>
       
+<h2 id="everyUser">Every Users' Recipes</h2>
+
       <button onClick={()=> setDisplayForm(!displayForm)} id='showFormToggle'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
       {displayForm && <AddRecipe refreshRecipes={getAllRecipes} />}
       
