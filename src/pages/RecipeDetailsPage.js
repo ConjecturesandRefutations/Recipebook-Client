@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from "axios";
+import FeedbackList from "../components/FeedbackList";
 
 import { useContext } from 'react'; 
 import { ThemeContext } from './../context/theme.context'; 
@@ -62,6 +63,8 @@ function RecipeDetailsPage (props) {
       <Link to={`/recipes/edit/${recipeId}`}>
         <button>Edit Recipe</button>
       </Link>
+
+      <FeedbackList recipeId={recipeId} storedToken={localStorage.getItem('authToken')} />
 
       <button onClick={deleteRecipe} id='deleteRecipe'>Delete Recipe</button>
       <br/>
