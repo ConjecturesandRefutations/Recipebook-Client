@@ -14,7 +14,7 @@ function AddRecipe(props) {
   const [imgUrl, setImgUrl] = useState("");
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
-  const [courseType, setCourseType] = useState("");
+  const [courseType, setCourseType] = useState("Other");
   const { TextArea } = Input 
 
     // ******** this function handles the file upload ********
@@ -97,6 +97,7 @@ function AddRecipe(props) {
         <Option value="Main">Main</Option>
         <Option value="Dessert">Dessert</Option>
         <Option value="Snack">Snack</Option>
+        <Option value="Other">Other</Option>
       </Select>
       <br />
           
