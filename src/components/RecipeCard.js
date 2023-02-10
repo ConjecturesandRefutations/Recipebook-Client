@@ -9,7 +9,7 @@ function RecipeCard ( { name, imgUrl, _id } ) {
       <Link to={`/recipes/${_id}`}>
         <Card id="recipeCard">
         <h3>{name}</h3>
-        <img src={imgUrl} alt="recipe" height={200} id='recipePic'/>
+        <img src={imgUrl} alt="recipe" height={200} width={175} id='recipePic'/>
       </Card>
       </Link>
       </Col>

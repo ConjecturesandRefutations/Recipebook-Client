@@ -63,6 +63,7 @@ textarea {
   text-align: center;
   margin: 0 auto;
   margin-bottom: 0px;
+  float: center;
 }
 
 .AddRecipe{
@@ -367,4 +368,16 @@ margin-left: 900px;
 
 .homeButtons{
   background-color: pink;
+}
+
+#defaultProfilePic{
+  max-height: 20vh;
+  max-width: 20vw;
+  float: left;
+  margin-left: 10vw;
+  border-radius: 50%;
+}
+
+.profileMain{
+   margin-right: 20vw;
 }
