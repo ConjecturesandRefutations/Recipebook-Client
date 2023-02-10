@@ -175,6 +175,7 @@ textarea {
 .RecipeListPage{
   height: 100vh;
   padding-bottom: 500px;
+  padding-top: 20px;
 }
 
 .RecipeDetails{
