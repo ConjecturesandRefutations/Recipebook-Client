@@ -1,40 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+
+import { AuthContext } from './../context/auth.context'
+import { ThemeContext } from './../context/theme.context'; 
 
 const API_URL = "http://localhost:5005";
 
-const ProfilePage = (props) => {
-    const userId = props.userId || localStorage.getItem("userId");
-    const [myRecipes, setMyRecipes] = useState([]);
+const ProfilePage = () => {
+  const { theme } = useContext(ThemeContext);
+  const { user } = useContext(AuthContext);
 
-  const getMyRecipes = () => {
-    const storedToken = localStorage.getItem("authToken");
+  const [myRecipes, setMyRecipes] = useState([]);
 
-    axios
-  .get(`${API_URL}/recipes/${userId}`,
-  { headers: { Authorization: `Bearer ${storedToken}` } })
-  .then((response) => {
-    console.log('the response' + response);
-    setMyRecipes(response.data);
-    })
-      .catch((error) => console.log(error));
-  };
+const getMyRecipes = () => {
+  const storedToken = localStorage.getItem("authToken");
 
-  useEffect(() => {
-    getMyRecipes();
-  }, [] );
+  axios
+.get(`${API_URL}/api/recipes/user/${user._id}`,
+{ headers: { Authorization: `Bearer ${storedToken}` } })
+.then((response) => {
+  setMyRecipes(response.data);
+  })
+    .catch((error) => console.log(error));
+};
 
-  return (
-    <div>
-      <h1>My Recipes</h1>
-      {myRecipes.map((recipe) => (
-        <div key={recipe._id}>
-          <h2>{recipe.name}</h2>
-          <p>{recipe.instructions}</p>
-        </div>
-      ))}
-    </div>
-  );
+useEffect(() => {
+  getMyRecipes();
+}, [] );
+
+return (
+  <div className={'myRecipes ' + theme}>
+ 
+   
+    <h1>My Recipes</h1>
+    {myRecipes.map((recipe) => (
+      <div key={recipe._id}>
+        <h2>{recipe.name}</h2>
+        <p>{recipe.instructions}</p>
+      </div>
+    ))}
+  </div>
+);
 };
 
 export default ProfilePage;

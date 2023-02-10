@@ -311,7 +311,10 @@ margin-left: 900px;
   background-color: gray;
 }
 
-
+.myRecipes{
+  height: 100vh;
+  padding-top: 20px;
+}
  
  .cutlery{
   position: absolute;
@@ -363,4 +366,8 @@ margin-left: 900px;
   position: absolute;
   margin-left: 34vw;
   color: green;
+}
+
+#recipePic{
+  max-width: 10vw;
 }

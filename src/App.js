@@ -24,7 +24,8 @@ function App() {
         <Route exact path="/recipes" element={<IsPrivate><RecipeListPage /></IsPrivate>} />
         <Route exact path="/recipes/:recipeId" element={<IsPrivate><RecipeDetailsPage /></IsPrivate>} />
         <Route exact path="/recipes/edit/:recipeId" element={<IsPrivate><EditRecipePage /></IsPrivate>} />
-        <Route exact path="/recipes/:userId" element={<IsPrivate><ProfilePage/></IsPrivate>} /> 
+        <Route exact path="/recipes/user/:userId" element={<IsPrivate><ProfilePage/></IsPrivate>} />
+
 
         <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>} />
         <Route path="/login" element={<IsAnon> <LoginPage /> </IsAnon>} />
