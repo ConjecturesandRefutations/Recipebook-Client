@@ -4,6 +4,7 @@ import { Row } from 'antd';
 import axios from "axios";
 import FeedbackCard from "./FeedbackCard";
 import AddFeedback from "./AddFeedback";
+import { StarTwoTone } from '@ant-design/icons'
 
 import { useContext } from 'react'; 
 
@@ -28,6 +29,7 @@ axios
 };
 
 const displayedFeedback = feedback;
+const reversedFeedback = [...displayedFeedback].reverse();
 
 useEffect(() => {
     getFeedback();
@@ -44,8 +46,19 @@ return (
             { displayedFeedback.map((feedback) => <FeedbackCard key={feedback._id} {...feedback} />  )}
          </Row> */}
          <ul>
-         { displayedFeedback.map((feedback) => 
-         <li key={feedback._id}><FeedbackCard comment={feedback.comment} score={feedback.score} author={feedback.author} /></li>
+            { reversedFeedback.map((feedback) => 
+            <li key={feedback._id}>
+                <div>
+                    {[...Array(feedback.score)].map((i) => (
+                        <StarTwoTone twoToneColor="#FFDE33" key={i} />
+                        )
+                    )}
+                </div>
+                <br/>
+                <p>{feedback.author}</p>
+                <br/>
+                <p>{feedback.comment}</p>
+            </li>
          ) }
          </ul>
          </div>
