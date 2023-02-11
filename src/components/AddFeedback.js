@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { Input } from 'antd';
 import { Select } from 'antd';
+
+import { AuthContext } from './../context/auth.context'
 
 const { Option } = Select;
 const API_URL = "http://localhost:5005";
@@ -10,13 +12,14 @@ const API_URL = "http://localhost:5005";
 function AddFeedback(props) {
     const [score, setScore] = useState(0);
     const [comment, setComment] = useState("");
+    const { user } = useContext(AuthContext);
     const { TextArea } = Input
     const { refreshFeedback, recipeId } = props
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const requestBody = { score, comment };
+        const requestBody = { score, comment, user };
         const storedToken = localStorage.getItem('authToken');
 
         axios
