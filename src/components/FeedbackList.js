@@ -50,7 +50,7 @@ return (
                         )
                     )}
                 </div>
-                {/* <p><b>{feedback.author.name ? `${feedback.author.name} says:` : ''}</b></p>   */}
+                <p><b>{feedback?.author?.name ? `${feedback.author.name} says:` : ''}</b></p>  
                 <p>{feedback.comment}</p>
             </li>
            ) }
