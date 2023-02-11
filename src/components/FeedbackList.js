@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import AddFeedback from "./AddFeedback";
 import { StarTwoTone } from '@ant-design/icons';
@@ -38,7 +38,7 @@ return (
             {displayForm && <AddFeedback refreshFeedback={getFeedback} recipeId={recipeId} />}
         </div>
          <div className="FeedbackList">
-          <ul>
+          <ul style={{listStyleType:'none'}}>
             { reversedFeedback.map((feedback) => 
             <li key={feedback.id}>
                 <div><p><b>{feedback?.author?.name ? `${feedback.author.name} commented:` : ''}</b></p></div>
