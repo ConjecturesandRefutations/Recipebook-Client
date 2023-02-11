@@ -1,8 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from 'react-router-dom';
-import { Row } from 'antd';
 import axios from "axios";
-import FeedbackCard from "./FeedbackCard";
 import AddFeedback from "./AddFeedback";
 import { StarTwoTone } from '@ant-design/icons';
 
@@ -44,14 +41,17 @@ return (
           <ul>
             { reversedFeedback.map((feedback) => 
             <li key={feedback.id}>
+                <div><p><b>{feedback?.author?.name ? `${feedback.author.name} commented:` : ''}</b></p></div>
                 <div className="stars">
                     {[...Array(feedback.score)].map((i) => (
                         <StarTwoTone twoToneColor="#FFDE33" key={i} />
                         )
                     )}
                 </div>
-                <p><b>{feedback?.author?.name ? `${feedback.author.name} says:` : ''}</b></p>  
-                <p>{feedback.comment}</p>
+                <br/>
+                <div>
+                    <p>{feedback.comment}</p>
+                </div> 
             </li>
            ) }
           </ul>
