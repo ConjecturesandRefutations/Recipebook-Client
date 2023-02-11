@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
-import { Row } from 'antd';
 import axios from "axios";
-import FeedbackCard from "./FeedbackCard";
 import AddFeedback from "./AddFeedback";
+import { StarTwoTone } from '@ant-design/icons';
 
-import { useContext } from 'react'; 
 
 const API_URL = "http://localhost:5005";
 
@@ -20,14 +17,15 @@ axios
     { headers: { Authorization: `Bearer ${storedToken}` } }
     )
     .then((response) => {
-        const recipeFeedback = response.data.feedback;
-        setFeedback(recipeFeedback);
-        console.log(feedback);
+        setFeedback(response.data.feedback);
+        setDisplayForm(false);
+        console.log("the response.data.feedback is ", response.data.feedback);
     })
     .catch((error) => console.log(error))
 };
 
-const displayedFeedback = feedback;
+// const displayedFeedback = feedback;
+const reversedFeedback = [...feedback].reverse();
 
 useEffect(() => {
     getFeedback();
@@ -40,14 +38,23 @@ return (
             {displayForm && <AddFeedback refreshFeedback={getFeedback} recipeId={recipeId} />}
         </div>
          <div className="FeedbackList">
-         {/* <Row style={{ width: '100%', justifyContent: 'center' }}>
-            { displayedFeedback.map((feedback) => <FeedbackCard key={feedback._id} {...feedback} />  )}
-         </Row> */}
-         <ul>
-         { displayedFeedback.map((feedback) => 
-         <li key={feedback._id}><FeedbackCard comment={feedback.comment} score={feedback.score} author={feedback.author} /></li>
-         ) }
-         </ul>
+          <ul style={{listStyleType:'none'}}>
+            { reversedFeedback.map((feedback) => 
+            <li key={feedback.id}>
+                <div><p><b>{feedback?.author?.name ? `${feedback.author.name} commented:` : ''}</b></p></div>
+                <div className="stars">
+                    {[...Array(feedback.score)].map((i) => (
+                        <StarTwoTone twoToneColor="#FFDE33" key={i} />
+                        )
+                    )}
+                </div>
+                <br/>
+                <div>
+                    <p>{feedback.comment}</p>
+                </div> 
+            </li>
+           ) }
+          </ul>
          </div>
     </div>
 )
