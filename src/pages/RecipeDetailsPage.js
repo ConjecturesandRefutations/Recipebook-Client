@@ -5,6 +5,7 @@ import FeedbackList from "../components/FeedbackList";
 
 import { useContext } from 'react'; 
 import { ThemeContext } from './../context/theme.context'; 
+import { AuthContext } from './../context/auth.context'
 
 const API_URL = "http://localhost:5005";
 
@@ -13,8 +14,11 @@ function RecipeDetailsPage (props) {
   const [recipe, setRecipe] = useState(null);
   const { recipeId } = useParams();
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   const { theme } = useContext(ThemeContext);
+
+  const [userId, setUserId] = useState(null);
   
   const getRecipe = () => {
     const storedToken = localStorage.getItem('authToken');
@@ -47,10 +51,24 @@ function RecipeDetailsPage (props) {
       })
       .catch((err) => console.log(err));
   }; 
+
+
+  //The following use-effect has the function of making the edit/delete conditional
+  useEffect(() => {
+    const storedToken = localStorage.getItem("authToken");
+    axios
+    .get(`${API_URL}/api/user/${user._id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+  
+      .then((response) => {
+        console.log('response.data:' + response.data)
+        console.log('userId:' + userId);
+        setUserId(response.data._id);
+      })
+      .catch((error) => console.log('axios error' + error));
+  }, []);
   
   return (
     <div className={"RecipeDetails " + theme}>
-    
       {recipe && (
         <>
           <h1>{recipe.name}</h1>
@@ -59,19 +77,17 @@ function RecipeDetailsPage (props) {
           <p>{recipe.instructions}</p>
         </>
       )}
-
-      <Link to={`/recipes/edit/${recipeId}`}>
-        <button>Edit Recipe</button>
-      </Link>
-
+      {userId && recipe && userId === recipe.userId && (
+        <section className="editDelete-userOnly">
+          <Link to={`/recipes/edit/${recipeId}`}>
+            <button>Edit Recipe</button>
+          </Link>
+          <button onClick={deleteRecipe} id="deleteRecipe">
+            Delete Recipe
+          </button>
+        </section>
+      )}
       <FeedbackList recipeId={recipeId} storedToken={localStorage.getItem('authToken')} />
-
-      <button onClick={deleteRecipe} id='deleteRecipe'>Delete Recipe</button>
-      <br/>
-      <Link to={`/recipes`}>
-        <button id='back'>Back</button>
-      </Link>
-
     </div>
   );
 }
