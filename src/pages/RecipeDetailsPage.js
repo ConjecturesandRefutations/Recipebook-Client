@@ -12,9 +12,10 @@ const API_URL = "http://localhost:5005";
 
 function RecipeDetailsPage (props) {
   const [recipe, setRecipe] = useState(null);
+  const [myRecipes, setMyRecipes] = useState([]);
   const { recipeId } = useParams();
   const navigate = useNavigate();
-  const { user, setUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const { theme } = useContext(ThemeContext);
   
@@ -27,10 +28,10 @@ function RecipeDetailsPage (props) {
       .then((response) => {
         const oneRecipe = response.data;
         setRecipe(oneRecipe);
+        console.dir('oneRecipe' + oneRecipe)
       })
       .catch((error) => console.log(error));
   };
-  
   
   useEffect(()=> {
     getRecipe();
@@ -45,11 +46,32 @@ function RecipeDetailsPage (props) {
       { headers: { Authorization: `Bearer ${storedToken}` } }  
       )
       .then(() => {
+        
         navigate("/recipes");
       })
       .catch((err) => console.log(err));
   };   
+
+  const getMyRecipes = () => {
+    const storedToken = localStorage.getItem("authToken");
   
+    axios
+  .get(`${API_URL}/api/recipes/user/${user._id}`,
+  { headers: { Authorization: `Bearer ${storedToken}` } })
+  .then((response) => {
+    setMyRecipes(response.data);
+    })
+      .catch((error) => console.log(error));
+  };
+  
+  useEffect(() => {
+    getMyRecipes();
+  },  [] );
+
+/*   console.log(myRecipes.includes(recipe)) */
+  console.log((myRecipes.map((recipe)=> recipe._id)).includes(recipeId))
+ /*  console.log(recipeId) */
+
   return (
     <div className={"RecipeDetails " + theme}>
       {recipe && (
@@ -57,15 +79,13 @@ function RecipeDetailsPage (props) {
           <h1>{recipe.name}</h1>
           <p style={{ color: 'green', fontWeight: 'bold' }}>{recipe.isVegetarian ? 'Vegetarian 🍃' : '' }</p>
           <p style={{ color: 'green', fontWeight: 'bold' }}>{recipe.isVegan ? 'Vegan 🍃' : ''}</p>
-          <p>{recipe.instructions}</p>
-          <p>{recipeId}</p>
-          <p>{user._id}</p>
-          <p>{user.recipe}</p>
-          {console.log('RRR' + recipe.user)}
-        </>
+          <p> <span style={{fontWeight: 'bold' }}>Ingredients: </span>{recipe.ingredients}</p>
+          <p> <span style={{fontWeight: 'bold' }}>Instructions: </span>{recipe.instructions}</p>
+          </>
+        
       )}
-  
-  {user && recipe && `${recipe.user}` === `${user._id}` && (
+
+{(myRecipes.map((recipe)=> recipe._id)).includes(recipeId) ? (
   <section className="editDelete-userOnly">
     <Link to={`/recipes/edit/${recipeId}`}>
       <button>Edit Recipe</button>
@@ -74,13 +94,13 @@ function RecipeDetailsPage (props) {
       Delete Recipe
     </button>
   </section>
-)}
-  
+) : null}
+
+
+      
       <FeedbackList recipeId={recipeId} storedToken={localStorage.getItem('authToken')} />
     </div>
   );
-  
-
 }
 
 export default RecipeDetailsPage;

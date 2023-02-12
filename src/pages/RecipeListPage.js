@@ -67,6 +67,7 @@ function RecipeListPage() {
           <Select.Option value="Main">Main</Select.Option>
           <Select.Option value="Dessert">Dessert</Select.Option>
           <Select.Option value="Snack">Snack</Select.Option>
+          <Select.Option value="Breakfast">Breakfast</Select.Option>
           <Select.Option value="Other">Other</Select.Option>
         </Select>
       </section>

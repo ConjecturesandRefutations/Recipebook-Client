@@ -32,7 +32,6 @@ const getMyRecipes = () => {
 .get(`${API_URL}/api/recipes/user/${user._id}`,
 { headers: { Authorization: `Bearer ${storedToken}` } })
 .then((response) => {
-  console.log(response.data);
   setMyRecipes(response.data);
   })
     .catch((error) => console.log(error));
@@ -43,7 +42,7 @@ useEffect(() => {
 }, [] );
 
 const myFilteredRecipes = myRecipes.filter((recipe) => {
-  console.log(recipe.courseType)
+  
   return recipe.name.toLowerCase().includes(query.toLowerCase())
     && (!isVegetarian || recipe.isVegetarian || recipe.isVegan)
     && (!isVegan || recipe.isVegan)
@@ -80,6 +79,7 @@ return (
           <Select.Option value="Main">Main</Select.Option>
           <Select.Option value="Dessert">Dessert</Select.Option>
           <Select.Option value="Snack">Snack</Select.Option>
+          <Select.Option value="Breakfast">Breakfast</Select.Option>
           <Select.Option value="Other">Other</Select.Option>
         </Select>
       </section>
@@ -111,7 +111,7 @@ return (
       <Row style={{ width: '100%', justifyContent: 'center' }}>
       { myFilteredRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
       </Row>
-      
+      {console.log(user._id)}
   </div>
 );
 };

@@ -1,8 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import { Input } from 'antd';
+import { Input, Select } from 'antd';
 import service from "../api/service";
-import { Select } from 'antd';
 
 
 const { Option } = Select;
@@ -10,6 +9,7 @@ const API_URL = "http://localhost:5005";
 
 function AddRecipe(props) {
   const [name, setName] = useState("");
+  const [ingredients, setIngredients] = useState("");
   const [instructions, setInstructions] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [isVegan, setIsVegan] = useState(false);
@@ -43,7 +43,7 @@ function AddRecipe(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const requestBody = { name, instructions, imgUrl, isVegetarian, isVegan, courseType };
+    const requestBody = { name, ingredients, instructions, imgUrl, isVegetarian, isVegan, courseType };
 
     const storedToken = localStorage.getItem('authToken');
     
@@ -54,6 +54,7 @@ function AddRecipe(props) {
       .then((response) => {
         // Reset the state
         setName("");
+        setIngredients("");
         setInstructions("");
         setImgUrl("");
         setIsVegetarian(false)
@@ -80,6 +81,14 @@ function AddRecipe(props) {
           onChange={(e) => setName(e.target.value)}
         />
 
+        <label>Ingredients:</label>
+        <TextArea
+          type="text"
+          name="ingredients"
+          value={ingredients}
+          onChange={(e) => setIngredients(e.target.value)}
+        />
+
         <label>Instructions:</label>
         <TextArea
           type="text"
@@ -91,12 +100,12 @@ function AddRecipe(props) {
 <label>Course Type:</label>
       <Select
         value={courseType}
-        onChange={(value) => setCourseType(value) } style={{ width: 400 }}
-      >
+        onChange={(value) => setCourseType(value) } style={{ width: 400 }}>
         <Option value="Starter">Starter</Option>
         <Option value="Main">Main</Option>
         <Option value="Dessert">Dessert</Option>
         <Option value="Snack">Snack</Option>
+        <Option value="Breakfast">Breakfast</Option>
         <Option value="Other">Other</Option>
       </Select>
       <br />

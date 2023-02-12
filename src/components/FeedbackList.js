@@ -19,7 +19,7 @@ axios
     .then((response) => {
         setFeedback(response.data.feedback);
         setDisplayForm(false);
-        console.log("the response.data.feedback is ", response.data.feedback);
+        
     })
     .catch((error) => console.log(error))
 };
