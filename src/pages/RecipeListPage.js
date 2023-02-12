@@ -48,7 +48,7 @@ function RecipeListPage() {
     
     <div className={"RecipeListPage " + theme}>
       
-<h2 id="everyUser">Every Users' Recipes</h2>
+<h2 id="everyUser">All Users' Recipes</h2>
 
       <button onClick={()=> setDisplayForm(!displayForm)} id='showFormToggle'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
       {displayForm && <AddRecipe refreshRecipes={getAllRecipes} />}
@@ -67,6 +67,7 @@ function RecipeListPage() {
           <Select.Option value="Main">Main</Select.Option>
           <Select.Option value="Dessert">Dessert</Select.Option>
           <Select.Option value="Snack">Snack</Select.Option>
+          <Select.Option value="Breakfast">Breakfast</Select.Option>
           <Select.Option value="Other">Other</Select.Option>
         </Select>
       </section>

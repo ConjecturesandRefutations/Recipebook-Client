@@ -5,14 +5,17 @@ import FeedbackList from "../components/FeedbackList";
 
 import { useContext } from 'react'; 
 import { ThemeContext } from './../context/theme.context'; 
+import { AuthContext } from './../context/auth.context'
 
 const API_URL = "http://localhost:5005";
 
 
 function RecipeDetailsPage (props) {
   const [recipe, setRecipe] = useState(null);
+  const [myRecipes, setMyRecipes] = useState([]);
   const { recipeId } = useParams();
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   const { theme } = useContext(ThemeContext);
   
@@ -23,12 +26,12 @@ function RecipeDetailsPage (props) {
       { headers: { Authorization: `Bearer ${storedToken}` } }
       )
       .then((response) => {
-      	const oneRecipe = response.data;
-      	setRecipe(oneRecipe);
-    	})
+        const oneRecipe = response.data;
+        setRecipe(oneRecipe);
+        console.dir('oneRecipe' + oneRecipe)
+      })
       .catch((error) => console.log(error));
   };
-  
   
   useEffect(()=> {
     getRecipe();
@@ -43,35 +46,59 @@ function RecipeDetailsPage (props) {
       { headers: { Authorization: `Bearer ${storedToken}` } }  
       )
       .then(() => {
+        
         navigate("/recipes");
       })
       .catch((err) => console.log(err));
-  }; 
+  };   
+
+  const getMyRecipes = () => {
+    const storedToken = localStorage.getItem("authToken");
   
+    axios
+  .get(`${API_URL}/api/recipes/user/${user._id}`,
+  { headers: { Authorization: `Bearer ${storedToken}` } })
+  .then((response) => {
+    setMyRecipes(response.data);
+    })
+      .catch((error) => console.log(error));
+  };
+  
+  useEffect(() => {
+    getMyRecipes();
+  },  [] );
+
+/*   console.log(myRecipes.includes(recipe)) */
+  console.log((myRecipes.map((recipe)=> recipe._id)).includes(recipeId))
+ /*  console.log(recipeId) */
+
   return (
     <div className={"RecipeDetails " + theme}>
-    
       {recipe && (
         <>
           <h1>{recipe.name}</h1>
           <p style={{ color: 'green', fontWeight: 'bold' }}>{recipe.isVegetarian ? 'Vegetarian 🍃' : '' }</p>
           <p style={{ color: 'green', fontWeight: 'bold' }}>{recipe.isVegan ? 'Vegan 🍃' : ''}</p>
-          <p>{recipe.instructions}</p>
-        </>
+          <p> <span style={{fontWeight: 'bold' }}>Ingredients: </span>{recipe.ingredients}</p>
+          <p> <span style={{fontWeight: 'bold' }}>Instructions: </span>{recipe.instructions}</p>
+          </>
+        
       )}
 
-      <Link to={`/recipes/edit/${recipeId}`}>
-        <button>Edit Recipe</button>
-      </Link>
+{(myRecipes.map((recipe)=> recipe._id)).includes(recipeId) ? (
+  <section className="editDelete-userOnly">
+    <Link to={`/recipes/edit/${recipeId}`}>
+      <button>Edit Recipe</button>
+    </Link>
+    <button onClick={deleteRecipe} id="deleteRecipe">
+      Delete Recipe
+    </button>
+  </section>
+) : null}
 
+
+      
       <FeedbackList recipeId={recipeId} storedToken={localStorage.getItem('authToken')} />
-
-      <button onClick={deleteRecipe} id='deleteRecipe'>Delete Recipe</button>
-      <br/>
-      <Link to={`/recipes`}>
-        <button id='back'>Back</button>
-      </Link>
-
     </div>
   );
 }

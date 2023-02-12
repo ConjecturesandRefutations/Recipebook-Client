@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
-
+import { Input, Select } from 'antd';
 import { useContext } from 'react'; 
+
 import { ThemeContext } from './../context/theme.context'; 
 
 const API_URL = "http://localhost:5005";
 
 function EditRecipePage(props) {
   const [name, setName] = useState("");
+  const [ingredients, setIngredients] = useState("");
   const [instructions, setInstructions] = useState("");
   const [isVegetarian, setIsVegetarian] = useState(false);
   const [isVegan, setIsVegan] = useState(false);
   const [courseType, setCourseType] = useState("");
-  const courseTypes = ["Starter", "Main", "Dessert","Snack", "Other"] 
+  const { TextArea } = Input 
+  const { Option } = Select;
   
   const { recipeId } = useParams();
   const navigate = useNavigate();
@@ -31,6 +34,7 @@ function EditRecipePage(props) {
       .then((response) => {
         const oneRecipe = response.data;
         setName(oneRecipe.name);
+        setIngredients(oneRecipe.ingredients);
         setInstructions(oneRecipe.instructions);
         setIsVegetarian(oneRecipe.isVegetarian);
         setIsVegan(oneRecipe.isVegan);
@@ -43,7 +47,7 @@ function EditRecipePage(props) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const requestBody = { name, instructions, isVegetarian, isVegan, courseType };
+    const requestBody = { name, ingredients, instructions, isVegetarian, isVegan, courseType };
 
     const storedToken = localStorage.getItem('authToken');  
 
@@ -62,15 +66,22 @@ function EditRecipePage(props) {
 
       <form onSubmit={handleFormSubmit} className='EditRecipeForm' >
         <label>Name:</label>
-        <input
+        <Input
           type="text"
           name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+
+        <label>Ingredients:</label>
+        <TextArea
+          name="ingredients"
+          value={ingredients}
+          onChange={(e) => setIngredients(e.target.value)}
+        />
         
         <label>Instructions:</label>
-        <textarea
+        <TextArea
           name="instructions"
           value={instructions}
           onChange={(e) => setInstructions(e.target.value)}
@@ -78,11 +89,17 @@ function EditRecipePage(props) {
 
 <section className="selectCourseType">
 <label>Course Type:</label>
-<select value={courseType} onChange={(e) => setCourseType(e.target.value)}>
-  {courseTypes.map((courseTypeOption, index) => (
-    <option key={index} value={courseTypeOption}>{courseTypeOption}</option>
-  ))}
-</select>
+<Select
+        value={courseType}
+        onChange={(value) => setCourseType(value) } style={{ width: 400 }}>
+        <Option value="Starter">Starter</Option>
+        <Option value="Main">Main</Option>
+        <Option value="Dessert">Dessert</Option>
+        <Option value="Snack">Snack</Option>
+        <Option value="Breakfast">Breakfast</Option>
+        <Option value="Other">Other</Option>
+</Select>
+
 </section>
 
 <section className="checkboxEdit">
