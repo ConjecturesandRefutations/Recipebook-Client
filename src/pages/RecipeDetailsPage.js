@@ -68,10 +68,6 @@ function RecipeDetailsPage (props) {
     getMyRecipes();
   },  [] );
 
-/*   console.log(myRecipes.includes(recipe)) */
-  console.log((myRecipes.map((recipe)=> recipe._id)).includes(recipeId))
- /*  console.log(recipeId) */
-
   return (
     <div className={"RecipeDetails " + theme}>
       {recipe && (
@@ -97,8 +93,9 @@ function RecipeDetailsPage (props) {
 ) : null}
 
 
-      
+{!(myRecipes.map((recipe)=> recipe._id)).includes(recipeId) ? (
       <FeedbackList recipeId={recipeId} storedToken={localStorage.getItem('authToken')} />
+      ) : null}
     </div>
   );
 }
