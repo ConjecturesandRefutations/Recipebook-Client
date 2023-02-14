@@ -1,5 +1,4 @@
- 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useMatch } from "react-router-dom";
  
 import { useContext } from 'react'; 
 import { ThemeContext } from './../context/theme.context'; 
@@ -9,6 +8,9 @@ import cutlery from './../images/cutlerynoback.png'
 import sunMoon from './../images/sunMoon.jpg'
 
 function Navbar() {
+
+  const profileMatch = useMatch("/recipes/user/:userId");
+  const recipesMatch = useMatch("/recipes");
 
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { isLoggedIn, logOutUser } = useContext(AuthContext);
@@ -37,9 +39,20 @@ function Navbar() {
         <button id='homeButton'>Home</button>
       </NavLink>
 
-      <NavLink to="/recipes"  className={({ isActive }) => isActive ? "selected" : ""}>
+      <NavLink
+        to="/recipes"
+        className={recipesMatch ? "selected" : ""}
+      >
         <button id='recipesButton'>Recipes</button>
       </NavLink>
+
+      <NavLink
+        to={`/recipes/user/${profileMatch?.params.userId}`}
+        className={profileMatch ? "selected" : ""}
+      >
+        <button id='navProfileButton'>Profile</button>
+      </NavLink>
+
     </section>
 
     <img src={cutlery} alt='cutlery' width={50} height={50} className='cutlery'/>

@@ -63,6 +63,7 @@ textarea {
   text-align: center;
   margin: 0 auto;
   margin-bottom: 0px;
+  float: center;
 }
 
 .AddRecipe{
@@ -147,8 +148,7 @@ textarea {
  
 .dark a,
 .dark p,
-.dark h2,
-.dark span {
+.dark h2 {
   color: #ffffff;
   margin-top: 0px;
 }
@@ -174,6 +174,7 @@ textarea {
 .RecipeListPage{
   height: 100vh;
   padding-bottom: 500px;
+  padding-top: 20px;
 }
 
 .RecipeDetails{
@@ -298,7 +299,6 @@ margin-left: 900px;
   padding: 5px;
   background-color: red;
   max-width: 350px;
-  margin-left: 482px;
   border-radius: 5px;
 }
 
@@ -326,17 +326,92 @@ margin-left: 900px;
 
 #loginInput{
   float: right;
-  margin-right: 300px;
+  margin-right: 275px;
   width: 274px;
 }
 
 #signupInput{
   float: right;
-  margin-right: 300px;
+  margin-right: 275px;
  
 }
 
 .logo{
   margin-top: 50px;
+  margin-right: 10px;
   border-radius: 5px;
+}
+
+.errorPage{
+  height: 100vh;
+  padding-top: 10px;
+}
+
+.veganVegetarianFilters{
+  display: flex;
+  flex-direction: row;
+  max-width: 300px;
+}
+
+.checkboxEdit{
+  display: flex;
+  flex-direction: row;
+}
+
+.veggieCheckboxes{
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  margin-left: 34vw;
+  color: green;
+}
+
+.homeButtons{
+  background-color: pink;
+}
+
+#defaultProfilePic{
+  max-height: 20vh;
+  max-width: 20vw;
+  float: left;
+  margin-left: 10vw;
+  border-radius: 50%;
+}
+
+.profileMain{
+   margin-right: 20vw;
+}
+
+#reCentering {
+  margin-left: 20vw;
+}
+
+.myRecipes{
+  padding-top: 20px;
+}
+
+#everyUser{
+  margin-bottom: 0;
+}
+
+.FeedbackList li{
+  margin: 20px;
+  padding: 40px;
+  background: white;
+  border: 2px;
+  border-radius: 12px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.dark .search{
+color: white;
+} 
+
+.dark .feedback{
+  color: black;
+}
+
+.randomRecipe{
+  height: 100vh;
+  padding-top: 20px
 }
