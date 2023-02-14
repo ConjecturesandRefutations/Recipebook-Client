@@ -61,7 +61,7 @@ function RecipeListPage() {
           value={courseType}
           onChange={(value) => setCourseType(value)}
           style={{ width: 200 }}
-        >
+          className='courseSelect'>
           <Select.Option value="">All</Select.Option>
           <Select.Option value="Starter">Starter</Select.Option>
           <Select.Option value="Main">Main</Select.Option>

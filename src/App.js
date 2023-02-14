@@ -6,6 +6,7 @@ import RecipeListPage from "./pages/RecipeListPage";
 import RecipeDetailsPage from "./pages/RecipeDetailsPage";
 import EditRecipePage from "./pages/EditRecipePage";
 import ProfilePage from "./pages/ProfilePage";
+import RandomRecipe from "./pages/RandomRecipe";
 import ErrorPage from "./pages/ErrorPage";
 
 import SignupPage from "./pages/SignupPage";
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/recipes/:recipeId" element={<IsPrivate><RecipeDetailsPage /></IsPrivate>} />
         <Route exact path="/recipes/edit/:recipeId" element={<IsPrivate><EditRecipePage /></IsPrivate>} /> 
         <Route exact path="/recipes/user/:userId" element={<IsPrivate><ProfilePage/></IsPrivate>} />
+        <Route exact path="/recipes/random" element={<IsPrivate><RandomRecipe/></IsPrivate>} />
 
         <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>} />
         <Route path="/login" element={<IsAnon> <LoginPage /> </IsAnon>} />
