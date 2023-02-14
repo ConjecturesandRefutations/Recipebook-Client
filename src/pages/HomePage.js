@@ -52,7 +52,7 @@ function HomePage() {
         <p id='welcome'>Hello {user && user.name}!</p>
         <Link to={"/recipes/user/:userId"}><Button className='homeButtons'>Profile Page</Button></Link>
         <Link to={"/recipes/"}><Button className='homeButtons'>All Recipes</Button></Link>
-        <Button className='homeButtons'>Need Inspiration?</Button>
+        <Link to={"/recipes/random"}><Button className='homeButtons'>Need Inspiration?</Button></Link>
         <br/>
         <br/>
         <canvas id='canvas' height={250}></canvas>

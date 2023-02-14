@@ -9,7 +9,7 @@ function SearchBar(props) {
 
 	return (
     <div className='SearchBar'>
-       <span>Search</span>
+       <span className='search'>Search</span>
 		<Input type="text" onChange={handleInput} id='searchBar'/>
 	
       </div>

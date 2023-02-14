@@ -72,8 +72,8 @@ return (
         <Select
           value={courseType}
           onChange={(value) => setCourseType(value)}
-          style={{ width: 200 }}
-        >
+          style={{ width: 200 }}>
+
           <Select.Option value="">All</Select.Option>
           <Select.Option value="Starter">Starter</Select.Option>
           <Select.Option value="Main">Main</Select.Option>

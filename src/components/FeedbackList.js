@@ -41,7 +41,7 @@ return (
           <ul style={{listStyleType:'none'}}>
             { reversedFeedback.map((feedback) => 
             <li key={feedback.id}>
-                <div><p><b>{feedback?.author?.name ? `${feedback.author.name} commented:` : ''}</b></p></div>
+                <div><p><b className="feedback">{feedback?.author?.name ? `${feedback.author.name} commented:` : ''}</b></p></div>
                 <div className="stars">
                     {[...Array(feedback.score)].map((i) => (
                         <StarTwoTone twoToneColor="#FFDE33" key={i} />
@@ -50,7 +50,7 @@ return (
                 </div>
                 <br/>
                 <div>
-                    <p>{feedback.comment}</p>
+                    <p className="feedback">{feedback.comment}</p>
                 </div> 
             </li>
            ) }

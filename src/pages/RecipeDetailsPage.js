@@ -28,7 +28,6 @@ function RecipeDetailsPage (props) {
       .then((response) => {
         const oneRecipe = response.data;
         setRecipe(oneRecipe);
-        console.dir('oneRecipe' + oneRecipe)
       })
       .catch((error) => console.log(error));
   };

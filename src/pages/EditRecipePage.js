@@ -91,7 +91,8 @@ function EditRecipePage(props) {
 <label>Course Type:</label>
 <Select
         value={courseType}
-        onChange={(value) => setCourseType(value) } style={{ width: 400 }}>
+        onChange={(value) => setCourseType(value) } style={{ width: 400 }}
+        className='courseSelect'>
         <Option value="Starter">Starter</Option>
         <Option value="Main">Main</Option>
         <Option value="Dessert">Dessert</Option>
