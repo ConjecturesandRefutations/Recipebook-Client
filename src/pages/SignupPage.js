@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Input } from 'antd';
+import ClipLoader from "react-spinners/ClipLoader";
 import { useContext } from 'react'; 
 import { ThemeContext } from './../context/theme.context';
 import axios from "axios";
+
 
 import lightLogo from '../images/lightLogo.png'
 import darkLogo from '../images/darkLogo.png'
@@ -17,6 +19,7 @@ function SignupPage(props) {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [loading, setLoading] = useState(false);
 
   const { theme } = useContext(ThemeContext);
 
@@ -41,6 +44,8 @@ function SignupPage(props) {
     // Create an object representing the request body
     const requestBody = { email, password, name };
 
+    setLoading(true);
+
     // Make an axios request to the API
     // If POST request is successful redirect to login page
     // If the request resolves with an error, set the error message in the state
@@ -52,11 +57,17 @@ function SignupPage(props) {
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
       })
+      .finally(() => {
+        // Set loading state back to false
+        setLoading(false);
+      });
   };
 
   
   return (
     <div className={"signupPage " + theme}>
+
+{loading ? <ClipLoader color="#36d7b7" className="clipLoader"/> : null}
 
 <div id="signupInput">
       <h1>Sign Up</h1>

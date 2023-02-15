@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from "axios";
 import FeedbackList from "../components/FeedbackList";
+import ClipLoader from "react-spinners/ClipLoader";
 
 import { useContext } from 'react'; 
 import { ThemeContext } from './../context/theme.context'; 
@@ -17,6 +18,7 @@ function RecipeDetailsPage (props) {
   const { recipeId } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
 
   const { theme } = useContext(ThemeContext);
   
@@ -28,6 +30,7 @@ function RecipeDetailsPage (props) {
       )
       .then((response) => {
         const oneRecipe = response.data;
+        setLoading(false)
         setRecipe(oneRecipe);
       })
       .catch((error) => console.log(error));
@@ -36,6 +39,8 @@ function RecipeDetailsPage (props) {
   useEffect(()=> {
     getRecipe();
   }, [] );
+
+  function goBack(){ navigate(-1)}
 
   const deleteRecipe = () => {
 
@@ -47,7 +52,7 @@ function RecipeDetailsPage (props) {
       )
       .then(() => {
         
-        navigate("/recipes");
+        goBack()
       })
       .catch((err) => console.log(err));
   };   
@@ -70,6 +75,9 @@ function RecipeDetailsPage (props) {
 
   return (
     <div className={"RecipeDetails " + theme}>
+
+{loading ? <ClipLoader color="#36d7b7" /> : null}
+
       {recipe && (
         <>
           <h1>{recipe.name}</h1>
@@ -94,7 +102,7 @@ function RecipeDetailsPage (props) {
 
 
 {!(myRecipes.map((recipe)=> recipe._id)).includes(recipeId) ? (
-      <FeedbackList recipeId={recipeId} storedToken={localStorage.getItem('authToken')} />
+      <FeedbackList recipeId={recipeId} storedToken={localStorage.getItem('authToken')}/>
       ) : null}
     </div>
   );
