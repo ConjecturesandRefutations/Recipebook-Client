@@ -4,7 +4,7 @@ import AddFeedback from "./AddFeedback";
 import { StarTwoTone } from '@ant-design/icons';
 
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 function FeedbackList(props) {
 let [feedback, setFeedback] = useState([]);

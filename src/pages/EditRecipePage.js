@@ -6,7 +6,7 @@ import { useContext } from 'react';
 
 import { ThemeContext } from './../context/theme.context'; 
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 function EditRecipePage(props) {
   const [name, setName] = useState("");
