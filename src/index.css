@@ -416,3 +416,9 @@ color: white;
   height: 100vh;
   padding-top: 20px
 }
+
+.clipLoader{
+  position: absolute;
+  margin-left: 33vw;
+  margin-top: 10vh;
+}
