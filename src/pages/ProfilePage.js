@@ -11,7 +11,7 @@ import { ThemeContext } from './../context/theme.context';
 
 import defaultProfileImage from '../images/defaultProfile.jpg';
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 const ProfilePage = () => {
   const { theme } = useContext(ThemeContext);

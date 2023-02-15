@@ -9,7 +9,8 @@ import SearchBar from "../components/Search";
 import { useContext } from 'react'; 
 import { ThemeContext } from './../context/theme.context';
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
+
 
 function RecipeListPage() {
   let [recipes, setRecipes] = useState([]);
