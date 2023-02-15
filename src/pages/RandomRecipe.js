@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Button } from 'antd';
+import ClipLoader from "react-spinners/ClipLoader";
 
 import { useContext } from 'react'; 
 import { ThemeContext } from './../context/theme.context'; 
-import { AuthContext } from './../context/auth.context'
-/* import { Link } from 'react-router-dom'; */
+
 
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
@@ -14,7 +13,7 @@ const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 function RandomRecipe() {
     const { theme } = useContext(ThemeContext);
     const [recipes, setRecipes] = useState([]);
-    const { user } = useContext(AuthContext);
+    const [loading, setLoading] = useState(true);
 
     const refreshPage = ()=>{
       window.location.reload();
@@ -26,12 +25,13 @@ function RandomRecipe() {
       const storedToken = localStorage.getItem("authToken");
       
       axios
-        .get(`${API_URL}/api/recipes`,
-        { headers: { Authorization: `Bearer ${storedToken}` } })
-        .then((response) => setRecipes(response.data))
-        .catch((error) => console.log(error));
+      .get(`${API_URL}/api/recipes`,
+      { headers: { Authorization: `Bearer ${storedToken}` } })
+      .then(setLoading(false))
+      .then((response) => setRecipes(response.data) )
+      .catch((error) => console.log(error));
     };
-  
+
     useEffect(() => {
       getAllRecipes();
 
@@ -44,8 +44,11 @@ function RandomRecipe() {
 return(
 <div className={'randomRecipe ' + theme}>
 
+{loading ? <ClipLoader color="#36d7b7"/> : null}
+
 {randomRecipe && (
         <>
+        
           <h1>{randomRecipe.name}</h1>
           <p style={{ color: 'green', fontWeight: 'bold' }}>{randomRecipe.isVegetarian ? 'Vegetarian 🍃' : '' }</p>
           <p style={{ color: 'green', fontWeight: 'bold' }}>{randomRecipe.isVegan ? 'Vegan 🍃' : ''}</p>

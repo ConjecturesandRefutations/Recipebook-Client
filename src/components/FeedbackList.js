@@ -19,7 +19,6 @@ axios
     .then((response) => {
         setFeedback(response.data.feedback);
         setDisplayForm(false);
-        
     })
     .catch((error) => console.log(error))
 };
@@ -44,8 +43,10 @@ return (
                 <div><p><b className="feedback">{feedback?.author?.name ? `${feedback.author.name} commented:` : ''}</b></p></div>
                 <div className="stars">
                     {[...Array(feedback.score)].map((i) => (
+                        
                         <StarTwoTone twoToneColor="#FFDE33" key={i} />
                         )
+                        
                     )}
                 </div>
                 <br/>

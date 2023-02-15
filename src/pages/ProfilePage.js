@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Row, Select } from 'antd';
+import ClipLoader from "react-spinners/ClipLoader";
 
 import RecipeCard from "../components/RecipeCard";
 import AddRecipe from "../components/AddRecipe";
@@ -25,6 +26,8 @@ const ProfilePage = () => {
   const [query, setQuery] = useState('');
   const [courseType, setCourseType] = useState('');
 
+  const [loading, setLoading] = useState(true);
+
 const getMyRecipes = () => {
   const storedToken = localStorage.getItem("authToken");
 
@@ -34,6 +37,7 @@ const getMyRecipes = () => {
 .then((response) => {
   setMyRecipes(response.data);
   })
+  .then(setLoading(false))
     .catch((error) => console.log(error));
 };
 
@@ -107,6 +111,7 @@ return (
 
       </section>
 
+      {loading ? <ClipLoader color="#36d7b7" /> : null}
 
       <Row style={{ width: '100%', justifyContent: 'center' }}>
       { myFilteredRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 

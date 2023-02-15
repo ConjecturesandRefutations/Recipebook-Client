@@ -1,8 +1,9 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./../context/auth.context";
 import { Input } from 'antd';
+import ClipLoader from "react-spinners/ClipLoader";
 import { ThemeContext } from './../context/theme.context';
 import lightLogo from '../images/lightLogo.png'
 import darkLogo from '../images/darkLogo.png'
@@ -14,6 +15,8 @@ function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [loading, setLoading] = useState(false);
+
 
   const { theme } = useContext(ThemeContext);
 
@@ -37,10 +40,10 @@ function LoginPage(props) {
     e.preventDefault();
     const requestBody = { email, password };
 
+    setLoading(true);
+
     axios.post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
-        /* console.log("JWT token", response.data.authToken); */
-        
         storeToken(response.data.authToken);
         authenticateUser();
         navigate("/");
@@ -49,10 +52,17 @@ function LoginPage(props) {
       	const errorDescription = error.response.data.message;
       	setErrorMessage(errorDescription);
     	})
+      .finally(() => {
+        // Set loading state back to false
+        setLoading(false);
+      });
   };
   
   return (
     <div className={"loginPage " + theme}>
+
+{loading ? <ClipLoader color="#36d7b7" className="clipLoader"/> : null}
+
 
       <div id="loginInput">
       <h1>Login</h1>
