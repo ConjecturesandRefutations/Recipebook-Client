@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from "axios";
 import FeedbackList from "../components/FeedbackList";
 import ClipLoader from "react-spinners/ClipLoader";
 
-import { useContext } from 'react'; 
 import { ThemeContext } from './../context/theme.context'; 
 import { AuthContext } from './../context/auth.context'
 
@@ -101,9 +100,9 @@ function RecipeDetailsPage (props) {
 ) : null}
 
 
-{!(myRecipes.map((recipe)=> recipe._id)).includes(recipeId) ? (
+
       <FeedbackList recipeId={recipeId} storedToken={localStorage.getItem('authToken')} userId={user._id}/>
-      ) : null}
+ 
     </div>
   );
 }
