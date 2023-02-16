@@ -102,7 +102,7 @@ function RecipeDetailsPage (props) {
 
 
 {!(myRecipes.map((recipe)=> recipe._id)).includes(recipeId) ? (
-      <FeedbackList recipeId={recipeId} storedToken={localStorage.getItem('authToken')}/>
+      <FeedbackList recipeId={recipeId} storedToken={localStorage.getItem('authToken')} userId={user._id}/>
       ) : null}
     </div>
   );
