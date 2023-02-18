@@ -103,8 +103,8 @@ return (
                 <div>
                     {(myFeedbackIds.includes(feedback._id))
                     ? <div>
-                        <button onClick={()=>deleteFeedback(feedback._id)}>Delete my comment</button>
-                        <button onClick={()=> setFeedbackEditForm(!feedbackEditForm)} id='showFormToggle'>{feedbackEditForm ? 'Save' : 'Edit your feedback'}</button>
+                        <button onClick={()=>deleteFeedback(feedback._id) } style={{background:'red'}}>Delete my comment</button>
+                        <button onClick={()=> setFeedbackEditForm(!feedbackEditForm)} id='showFormToggle' style={{background:'orange'}}>{feedbackEditForm ? 'Save' : 'Edit your feedback'}</button>
                         {feedbackEditForm && <EditFeedback refreshFeedback={getFeedback} feedbackId={feedback._id} feedbackScore={feedback.score} feedbackComment={feedback.comment} />}
                     </div>
                     : null}

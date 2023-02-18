@@ -91,7 +91,7 @@ function RecipeDetailsPage (props) {
 {(myRecipes.map((recipe)=> recipe._id)).includes(recipeId) ? (
   <section className="editDelete-userOnly">
     <Link to={`/recipes/edit/${recipeId}`}>
-      <button>Edit Recipe</button>
+      <button style={{background:'orange'}}>Edit Recipe</button>
     </Link>
     <button onClick={deleteRecipe} id="deleteRecipe">
       Delete Recipe
@@ -100,6 +100,9 @@ function RecipeDetailsPage (props) {
 ) : null}
 
 
+<button onClick={()=>goBack()}>
+      Back
+    </button>
 
       <FeedbackList recipeId={recipeId} storedToken={localStorage.getItem('authToken')} userId={user._id}/>
  
