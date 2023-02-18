@@ -378,6 +378,44 @@ margin-left: 900px;
   border-radius: 50%;
 }
 
+#userInfo{
+display: flex;
+flex-direction: column;
+float: left;
+}
+
+#deleteAccount{
+  margin-left: 8vw;
+}
+
+#deleteAccount:hover{
+cursor: pointer;
+}
+
+#checking{
+  max-width: 15vh;
+  margin-left: 5vw;
+  position: absolute;
+  color: red;
+  font-weight: bold;
+}
+
+#yesNo{
+  display: flex;
+  flex-direction: row;
+  margin-left: 7vw;
+}
+
+#yes{
+  margin-left: 1vw;
+  cursor: pointer;
+}
+
+#no{
+  margin-left: 1vw;
+  cursor: pointer;
+}
+
 .profileMain{
    margin-right: 20vw;
 }
