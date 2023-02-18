@@ -24,18 +24,25 @@ axios
 };
 
 const reversedFeedback = [...feedback].reverse();
-
-const myFeedback = reversedFeedback.filter(comment => comment.author._id === userId)
-console.log('mu feedback', myFeedback);
-console.log('my userId', userId);
-
+const myFeedback = reversedFeedback.filter(comment => comment.author._id === userId);
 const myFeedbackIds = myFeedback.map(entry => entry._id);
-console.log('my feedback ids', myFeedbackIds)
 
 
 useEffect(() => {
     getFeedback();
 }, [] );
+
+
+function deleteFeedback(feedbackId) {
+    axios
+    .delete(`${API_URL}/api/feedback/${feedbackId}`,
+    { headers: { Authorization: `Bearer ${storedToken}` } } 
+    )
+    .then(() => {
+        getFeedback()
+    })
+    .catch((err) => console.log(err));
+}
 
 return (
     <div>
@@ -63,7 +70,10 @@ return (
                 <br/>
                 <div>
                     {(myFeedbackIds.includes(feedback._id))
-                    ? <button>Delete my comment</button>
+                    ? <div>
+                        <button onClick={()=>deleteFeedback(feedback._id)}>Delete my comment</button>
+                        <button>Edit comment</button>
+                    </div>
                     : null}
                 </div>
             </li>
