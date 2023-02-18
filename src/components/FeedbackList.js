@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import AddFeedback from "./AddFeedback";
 import { StarTwoTone } from '@ant-design/icons';
+import { AuthContext } from './../context/auth.context'
 
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 function FeedbackList(props) {
+const [myRecipes, setMyRecipes] = useState([]);
 let [feedback, setFeedback] = useState([]);
 const [displayForm, setDisplayForm] = useState(false);
-const { recipeId, storedToken } = props;
+const { recipeId, storedToken, userId } = props;
+const { user } = useContext(AuthContext);
 
 const getFeedback = () => {
 axios
@@ -23,23 +26,54 @@ axios
     .catch((error) => console.log(error))
 };
 
-// const displayedFeedback = feedback;
 const reversedFeedback = [...feedback].reverse();
+
+const myFeedback = reversedFeedback.filter(comment => comment.author._id === userId)
+console.log('mu feedback', myFeedback);
+console.log('my userId', userId);
+
+const myFeedbackIds = myFeedback.map(entry => entry._id);
+console.log('my feedback ids', myFeedbackIds)
+
 
 useEffect(() => {
     getFeedback();
 }, [] );
 
+const getMyRecipes = () => {
+    const storedToken = localStorage.getItem("authToken");
+  
+    axios
+  .get(`${API_URL}/api/recipes/user/${user._id}`,
+  { headers: { Authorization: `Bearer ${storedToken}` } })
+  .then((response) => {
+    setMyRecipes(response.data);
+    })
+      .catch((error) => console.log(error));
+  };
+  
+  useEffect(() => {
+    getMyRecipes();
+  },  [] );
+
+  console.log((myRecipes.map((recipe)=> recipe._id)).includes(recipeId))
+
 return (
     <div>
+
+        {!(myRecipes.map((recipe)=> recipe._id)).includes(recipeId) ? (
+
         <div>
             <button onClick={()=> setDisplayForm(!displayForm)} id='showFormToggle'>{displayForm ? 'Close Form' : 'Share your feedback about this recipe'}</button>
             {displayForm && <AddFeedback refreshFeedback={getFeedback} recipeId={recipeId} />}
         </div>
+
+        ) : null}
+
          <div className="FeedbackList">
           <ul style={{listStyleType:'none'}}>
             { reversedFeedback.map((feedback) => 
-            <li key={feedback.id}>
+            <li key={feedback._id}>
                 <div><p><b className="feedback">{feedback?.author?.name ? `${feedback.author.name} commented:` : ''}</b></p></div>
                 <div className="stars">
                     {[...Array(feedback.score)].map((i) => (
@@ -53,10 +87,18 @@ return (
                 <div>
                     <p className="feedback">{feedback.comment}</p>
                 </div> 
+                <br/>
+                <div>
+                    {(myFeedbackIds.includes(feedback._id))
+                    ? <button>Delete my comment</button>
+                    : null}
+                </div>
             </li>
            ) }
           </ul>
+          <br/>
          </div>
+         <br/>
     </div>
 )
 

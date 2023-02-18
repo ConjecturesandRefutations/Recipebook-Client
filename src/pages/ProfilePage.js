@@ -11,6 +11,7 @@ import { AuthContext } from './../context/auth.context'
 import { ThemeContext } from './../context/theme.context'; 
 
 import defaultProfileImage from '../images/defaultProfile.jpg';
+import noRecipes from '../images/hungry.jpg'
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
@@ -53,6 +54,7 @@ const myFilteredRecipes = myRecipes.filter((recipe) => {
     && (courseType === '' || recipe.courseType === courseType);
 });
 
+console.log('myRecipes' + myRecipes)
 
 return (
   <div className={'myRecipes ' + theme}>
@@ -116,7 +118,15 @@ return (
       <Row style={{ width: '100%', justifyContent: 'center' }}>
       { myFilteredRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
       </Row>
-      {console.log(user._id)}
+
+      {(myRecipes.length === 0) ? (
+        <div className='noRecipes'>
+          <h3>You haven't added any Recipes! Get Cooking!</h3>
+          <img src={noRecipes} height={325} width={300}/>
+        </div>
+) : null}
+
+
   </div>
 );
 };

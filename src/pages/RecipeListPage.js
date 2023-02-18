@@ -10,6 +10,8 @@ import SearchBar from "../components/Search";
 import { useContext } from 'react'; 
 import { ThemeContext } from './../context/theme.context';
 
+import noRecipes from '../images/hungry.jpg'
+
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 
@@ -48,6 +50,8 @@ function RecipeListPage() {
       && (courseType === '' || recipe.courseType === courseType);
   });
   
+  console.log(recipes.length === 0)
+
   return (
     
     <div className={"RecipeListPage " + theme}>
@@ -101,6 +105,13 @@ function RecipeListPage() {
       <Row style={{ width: '100%', justifyContent: 'center' }}>
       { filteredRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
       </Row>
+
+      {(recipes.length === 0) ? (
+        <div className='noRecipes'>
+          <h3>Nobody has added a Recipe! Be the First!</h3>
+          <img src={noRecipes} height={325} width={300}/>
+        </div>
+) : null}
 
     </div>
   );
