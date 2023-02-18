@@ -18,6 +18,7 @@ function RecipeDetailsPage (props) {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
+  const [creatorName, setCreatorName] = useState('');
 
   const { theme } = useContext(ThemeContext);
   
@@ -72,6 +73,26 @@ function RecipeDetailsPage (props) {
     getMyRecipes();
   },  [] );
 
+///The following route determine the user who created the the given recipe
+
+   const getRecipeUser = () => {
+    const storedToken = localStorage.getItem('authToken');
+    axios
+      .get(`${API_URL}/api/recipes/${recipeId}/user`, {
+        headers: { Authorization: `Bearer ${storedToken}` }
+      })
+      .then((response) => {
+        const creator = response.data;
+        setCreatorName(creator.name);
+      })
+      .catch((error) => console.log(error));
+  };
+  
+  useEffect(() => {
+    getRecipeUser();
+  },  [] );
+
+
   return (
     <div className={"RecipeDetails " + theme}>
 
@@ -79,6 +100,7 @@ function RecipeDetailsPage (props) {
 
       {recipe && (
         <>
+             <div className="creatorName"><p>Recipe Created By: </p><p style={{fontWeight:'bold'}}>{creatorName}</p></div>
           <h1>{recipe.name}</h1>
           <p style={{ color: 'green', fontWeight: 'bold' }}>{recipe.isVegetarian ? 'Vegetarian 🍃' : '' }</p>
           <p style={{ color: 'green', fontWeight: 'bold' }}>{recipe.isVegan ? 'Vegan 🍃' : ''}</p>
@@ -98,6 +120,7 @@ function RecipeDetailsPage (props) {
     </button>
   </section>
 ) : null}
+
 
 
 <button onClick={()=>goBack()}>
