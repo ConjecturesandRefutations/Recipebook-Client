@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import AddFeedback from "./AddFeedback";
+import EditFeedback from "./EditFeedback";
 import { StarTwoTone } from '@ant-design/icons';
 import { AuthContext } from './../context/auth.context'
 
@@ -11,6 +12,7 @@ function FeedbackList(props) {
 const [myRecipes, setMyRecipes] = useState([]);
 let [feedback, setFeedback] = useState([]);
 const [displayForm, setDisplayForm] = useState(false);
+const [feedbackEditForm, setFeedbackEditForm] = useState(false);
 const { recipeId, storedToken, userId } = props;
 const { user } = useContext(AuthContext);
 
@@ -101,7 +103,8 @@ return (
                     {(myFeedbackIds.includes(feedback._id))
                     ? <div>
                         <button onClick={()=>deleteFeedback(feedback._id)}>Delete my comment</button>
-                        <button>Edit comment</button>
+                        <button onClick={()=> setFeedbackEditForm(!feedbackEditForm)} id='showFormToggle'>{feedbackEditForm ? 'Save' : 'Edit your feedback'}</button>
+                        {feedbackEditForm && <EditFeedback refreshFeedback={getFeedback} feedbackId={feedback._id} feedbackScore={feedback.score} feedbackComment={feedback.comment} />}
                     </div>
                     : null}
                 </div>
