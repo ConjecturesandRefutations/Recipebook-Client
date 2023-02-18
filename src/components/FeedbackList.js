@@ -24,6 +24,7 @@ axios
     .then((response) => {
         setFeedback(response.data.feedback);
         setDisplayForm(false);
+        setFeedbackEditForm(false);
     })
     .catch((error) => console.log(error))
 };
