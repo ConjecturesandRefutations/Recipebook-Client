@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import AddFeedback from "./AddFeedback";
+import EditFeedback from "./EditFeedback";
 import { StarTwoTone } from '@ant-design/icons';
 import { AuthContext } from './../context/auth.context'
 
@@ -11,6 +12,7 @@ function FeedbackList(props) {
 const [myRecipes, setMyRecipes] = useState([]);
 let [feedback, setFeedback] = useState([]);
 const [displayForm, setDisplayForm] = useState(false);
+const [feedbackEditForm, setFeedbackEditForm] = useState(false);
 const { recipeId, storedToken, userId } = props;
 const { user } = useContext(AuthContext);
 
@@ -22,23 +24,33 @@ axios
     .then((response) => {
         setFeedback(response.data.feedback);
         setDisplayForm(false);
+        setFeedbackEditForm(false);
     })
     .catch((error) => console.log(error))
 };
 
 const reversedFeedback = [...feedback].reverse();
-
-const myFeedback = reversedFeedback.filter(comment => comment.author._id === userId)
-console.log('mu feedback', myFeedback);
-console.log('my userId', userId);
-
+const myFeedback = reversedFeedback.filter(comment => comment.author._id === userId);
 const myFeedbackIds = myFeedback.map(entry => entry._id);
-console.log('my feedback ids', myFeedbackIds)
 
 
 useEffect(() => {
     getFeedback();
 }, [] );
+
+
+
+function deleteFeedback(feedbackId) {
+    axios
+    .delete(`${API_URL}/api/feedback/${feedbackId}`,
+    { headers: { Authorization: `Bearer ${storedToken}` } } 
+    )
+    .then(() => {
+        getFeedback()
+    })
+    .catch((err) => console.log(err));
+}
+
 
 const getMyRecipes = () => {
     const storedToken = localStorage.getItem("authToken");
@@ -90,7 +102,11 @@ return (
                 <br/>
                 <div>
                     {(myFeedbackIds.includes(feedback._id))
-                    ? <button>Delete my comment</button>
+                    ? <div>
+                        <button onClick={()=>deleteFeedback(feedback._id)}>Delete my comment</button>
+                        <button onClick={()=> setFeedbackEditForm(!feedbackEditForm)} id='showFormToggle'>{feedbackEditForm ? 'Save' : 'Edit your feedback'}</button>
+                        {feedbackEditForm && <EditFeedback refreshFeedback={getFeedback} feedbackId={feedback._id} feedbackScore={feedback.score} feedbackComment={feedback.comment} />}
+                    </div>
                     : null}
                 </div>
             </li>
