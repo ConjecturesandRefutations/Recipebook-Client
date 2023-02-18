@@ -57,6 +57,8 @@ const myFilteredRecipes = myRecipes.filter((recipe) => {
     && (courseType === '' || recipe.courseType === courseType);
 });
 
+const reversedRecipes = [...myFilteredRecipes].reverse();
+
 const deleteUser = () => {
   const storedToken = localStorage.getItem('authToken');
 
@@ -150,7 +152,7 @@ return (
       {loading ? <ClipLoader color="#36d7b7" /> : null}
 
       <Row style={{ width: '100%', justifyContent: 'center' }}>
-      { myFilteredRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
+      { reversedRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
       </Row>
 
       {(myRecipes.length === 0) ? (

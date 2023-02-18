@@ -50,7 +50,7 @@ function RecipeListPage() {
       && (courseType === '' || recipe.courseType === courseType);
   });
   
-  console.log(recipes.length === 0)
+  const reversedRecipes = [...filteredRecipes].reverse();
 
   return (
     
@@ -103,7 +103,7 @@ function RecipeListPage() {
       {loading ? <ClipLoader color="#36d7b7" /> : null}
 
       <Row style={{ width: '100%', justifyContent: 'center' }}>
-      { filteredRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
+      { reversedRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
       </Row>
 
       {(recipes.length === 0) ? (

@@ -464,3 +464,17 @@ color: white;
 .noRecipes{
   margin-top: 50px;
 }
+
+.creatorName{
+ display: flex;
+ flex-direction: row;
+ position: absolute;
+ margin-left: 5vw;
+ background-color: whitesmoke;
+ border-radius: 5px;
+ padding: 0 5px 0 5px;  
+}
+
+.creatorName p:last-child {
+  margin-left: 10px;
+}
