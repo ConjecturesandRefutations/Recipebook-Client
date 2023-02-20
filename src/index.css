@@ -384,12 +384,19 @@ flex-direction: column;
 float: left;
 }
 
+
 #deleteAccount{
-  margin-left: 8vw;
+  margin-top: 5vh;
 }
 
 #deleteAccount:hover{
 cursor: pointer;
+}
+
+.uploadProfilePic{
+  margin-left: 3.8vw;
+  margin-top: 20vh;
+  position: absolute;
 }
 
 #checking{
