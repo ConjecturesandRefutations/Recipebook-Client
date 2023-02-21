@@ -63,7 +63,8 @@ function RecipeListPage() {
       
       <SearchBar setQueryProp={setQuery}/>
 
-      <section className="courseTypeFilter">
+      <section>
+        
       <p>Course Type:</p>
         <Select
           value={courseType}
@@ -78,6 +79,7 @@ function RecipeListPage() {
           <Select.Option value="Breakfast">Breakfast</Select.Option>
           <Select.Option value="Other">Other</Select.Option>
         </Select>
+        
       </section>
 
       <section className="veggieCheckboxes">

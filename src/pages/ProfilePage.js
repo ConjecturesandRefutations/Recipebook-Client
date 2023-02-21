@@ -109,12 +109,14 @@ return (
 
       </section>
 
-      <section className="courseTypeFilter">
-      <p>Course Type:</p>
+      <section >
+      <div id="courseTypeSelect">
+      <p className='courseType'>Course Type:</p>
         <Select
           value={courseType}
           onChange={(value) => setCourseType(value)}
-          style={{ width: 200 }}>
+          style={{ width: 200 }}
+          className="courseTypeFilter">
 
           <Select.Option value="">All</Select.Option>
           <Select.Option value="Starter">Starter</Select.Option>
@@ -124,6 +126,7 @@ return (
           <Select.Option value="Breakfast">Breakfast</Select.Option>
           <Select.Option value="Other">Other</Select.Option>
         </Select>
+        </div>
       </section>
 
       <section className="veggieCheckboxes">

@@ -485,3 +485,16 @@ color: white;
 .creatorName p:last-child {
   margin-left: 10px;
 }
+
+ .courseType{
+  margin-right: 20vw; 
+} 
+
+#courseTypeSelect{
+  display: flex;
+  flex-direction: column;
+}
+
+.courseTypeFilter{
+margin-left: 22vw;
+}
