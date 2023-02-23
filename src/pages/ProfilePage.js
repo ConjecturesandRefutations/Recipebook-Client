@@ -143,8 +143,8 @@ return (
 
  <section id='userInfo'>
  <img alt='profile_image' src={user.image ? user.image : defaultProfile} id='defaultProfilePic'/>
- <form onSubmit={handleSubmit}>
-                            <input type="file" name="imageUrl" onChange={(e) => handleFileUpload(e)} id='uploadimage'/>
+ <form onSubmit={handleSubmit} className='uploadimage'>
+                            <input type="file" name="imageUrl" onChange={(e) => handleFileUpload(e)} />
                             
                         </form>
         {showDeleteConfirmation ? ( 

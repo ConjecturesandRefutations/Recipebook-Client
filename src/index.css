@@ -499,8 +499,13 @@ color: white;
 margin-left: 22vw;
 }
 
-#uploadimage{
-  margin-left: 5vw;
+.dark .uploadimage{
+  margin-left: 50px;
+  background-color: rgb(55, 51, 56)
+}
+
+.uploadimage:hover{
+  cursor: pointer;
 }
 
 #creatorImage{
