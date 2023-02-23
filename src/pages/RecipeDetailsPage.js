@@ -117,8 +117,10 @@ function RecipeDetailsPage (props) {
           <h1>{recipe.name}</h1>
           <p style={{ color: 'green', fontWeight: 'bold' }}>{recipe.isVegetarian ? 'Vegetarian 🍃' : '' }</p>
           <p style={{ color: 'green', fontWeight: 'bold' }}>{recipe.isVegan ? 'Vegan 🍃' : ''}</p>
+          <div className="recipeDetails">
           <p> <span style={{fontWeight: 'bold' }}>Ingredients: </span>{recipe.ingredients}</p>
           <p> <span style={{fontWeight: 'bold' }}>Instructions: </span>{recipe.instructions}</p>
+          </div>
           </>
         
       )}
