@@ -44,7 +44,7 @@ const ProfilePage = () => {
       });
     })
     .catch(err => console.log(err))
-  }, []);
+  }, [setUser, user]);
 
   
 
