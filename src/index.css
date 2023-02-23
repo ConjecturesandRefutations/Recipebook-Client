@@ -378,6 +378,52 @@ margin-left: 900px;
   border-radius: 50%;
 }
 
+#userInfo{
+display: flex;
+flex-direction: column;
+float: left;
+}
+
+
+#deleteAccount{
+  margin-top: 5vh;
+  margin-left: 5vw;
+}
+
+#deleteAccount:hover{
+cursor: pointer;
+}
+
+ .uploadimage{
+  margin-left: 3vw;  
+} 
+
+#checking{
+  max-width: 30vh;
+  margin-left: 5vw;
+  margin-top: 30vh;
+  position: absolute;
+  color: red;
+  font-weight: bold;
+}
+
+#yesNo{
+  display: flex;
+  flex-direction: row;
+  margin-left: 7vw;
+  margin-top: 10vh;
+}
+
+#yes{
+  margin-left: 1vw;
+  cursor: pointer;
+}
+
+#no{
+  margin-left: 1vw;
+  cursor: pointer;
+}
+
 .profileMain{
    margin-right: 20vw;
 }
@@ -425,4 +471,51 @@ color: white;
 
 .noRecipes{
   margin-top: 50px;
+}
+
+.creatorName{
+ display: flex;
+ flex-direction: row;
+ position: absolute;
+ margin-left: 5vw;
+ background-color: whitesmoke;
+ border-radius: 5px;
+ padding: 0 5px 0 5px;  
+}
+
+#creator{
+  margin-left: 5px
+}
+
+ .courseType{
+  margin-right: 20vw; 
+} 
+
+#courseTypeSelect{
+  display: flex;
+  flex-direction: column;
+}
+
+.courseTypeFilter{
+margin-left: 22vw;
+}
+
+.dark .uploadimage{
+  margin-left: 50px;
+  background-color: rgb(55, 51, 56)
+}
+
+.uploadimage:hover{
+  cursor: pointer;
+}
+
+#creatorImage{
+  height: 10vh;
+  width: 5vw;
+  margin-left: 2vw
+}
+
+#userName{
+  position: absolute;
+  margin-left: 20vw;
 }

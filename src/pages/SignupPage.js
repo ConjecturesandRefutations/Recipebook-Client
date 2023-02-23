@@ -4,6 +4,7 @@ import { Input } from 'antd';
 import ClipLoader from "react-spinners/ClipLoader";
 import { useContext } from 'react'; 
 import { ThemeContext } from './../context/theme.context';
+import { AuthContext } from "./../context/auth.context";
 import axios from "axios";
 
 
@@ -23,6 +24,8 @@ function SignupPage(props) {
 
   const { theme } = useContext(ThemeContext);
 
+  const { storeToken, authenticateUser } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   
@@ -39,29 +42,33 @@ function SignupPage(props) {
 };
 
   
-  const handleSignupSubmit = (e) => {
-    e.preventDefault();
-    // Create an object representing the request body
-    const requestBody = { email, password, name };
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const requestBody = { email, password, name };
 
-    setLoading(true);
+  setLoading(true);
 
-    // Make an axios request to the API
-    // If POST request is successful redirect to login page
-    // If the request resolves with an error, set the error message in the state
-    axios.post(`${API_URL}/auth/signup`, requestBody)
-      .then((response) => {
-        navigate("/login");
-      })
-      .catch((error) => {
-        const errorDescription = error.response.data.message;
-        setErrorMessage(errorDescription);
-      })
-      .finally(() => {
-        // Set loading state back to false
-        setLoading(false);
-      });
-  };
+  axios.post(`${API_URL}/auth/signup`, requestBody)
+    .then((response) => {
+      axios.post(`${API_URL}/auth/login`, { email, password, name })
+        .then((response) => {
+          storeToken(response.data.authToken);
+          authenticateUser();
+          navigate("/");
+        })
+        .catch((error) => {
+          console.log("Failed to log in user after sign up: ", error);
+          setErrorMessage("Failed to log in user after sign up");
+        });
+    })
+    .catch((error) => {
+      const errorDescription = error.response.data.message;
+      setErrorMessage(errorDescription);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+};
 
   
   return (
@@ -72,7 +79,7 @@ function SignupPage(props) {
 <div id="signupInput">
       <h1>Sign Up</h1>
 
-      <form onSubmit={handleSignupSubmit} className='loginSignupForm'>
+      <form onSubmit={handleSubmit} className='loginSignupForm'>
         <label>Email:</label>
         <Input type="email" name="email" value={email} onChange={handleEmail} />
 

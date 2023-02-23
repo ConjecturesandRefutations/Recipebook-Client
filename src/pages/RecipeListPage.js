@@ -50,7 +50,7 @@ function RecipeListPage() {
       && (courseType === '' || recipe.courseType === courseType);
   });
   
-  console.log(recipes.length === 0)
+  const reversedRecipes = [...filteredRecipes].reverse();
 
   return (
     
@@ -63,7 +63,8 @@ function RecipeListPage() {
       
       <SearchBar setQueryProp={setQuery}/>
 
-      <section className="courseTypeFilter">
+      <section>
+        
       <p>Course Type:</p>
         <Select
           value={courseType}
@@ -78,6 +79,7 @@ function RecipeListPage() {
           <Select.Option value="Breakfast">Breakfast</Select.Option>
           <Select.Option value="Other">Other</Select.Option>
         </Select>
+        
       </section>
 
       <section className="veggieCheckboxes">
@@ -103,13 +105,13 @@ function RecipeListPage() {
       {loading ? <ClipLoader color="#36d7b7" /> : null}
 
       <Row style={{ width: '100%', justifyContent: 'center' }}>
-      { filteredRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
+      { reversedRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
       </Row>
 
       {(recipes.length === 0) ? (
         <div className='noRecipes'>
           <h3>Nobody has added a Recipe! Be the First!</h3>
-          <img src={noRecipes} height={325} width={300}/>
+          <img src={noRecipes} alt='noRecipes' height={325} width={300}/>
         </div>
 ) : null}
 

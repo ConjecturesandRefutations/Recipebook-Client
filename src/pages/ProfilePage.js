@@ -10,14 +10,14 @@ import SearchBar from "../components/Search";
 import { AuthContext } from './../context/auth.context'
 import { ThemeContext } from './../context/theme.context'; 
 
-import defaultProfileImage from '../images/defaultProfile.jpg';
+import defaultProfile from '../images/defaultProfile.jpg';
 import noRecipes from '../images/hungry.jpg'
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 const ProfilePage = () => {
   const { theme } = useContext(ThemeContext);
-  const { user } = useContext(AuthContext);
+  const { user, logOutUser, setUser } = useContext(AuthContext);
 
   const [myRecipes, setMyRecipes] = useState([]);
   const [displayForm, setDisplayForm] = useState(false)
@@ -28,6 +28,25 @@ const ProfilePage = () => {
   const [courseType, setCourseType] = useState('');
 
   const [loading, setLoading] = useState(true);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+
+  const [imageUrl, setImageUrl] = useState("");
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('authToken');
+    axios.get(`${API_URL}/api/users`, {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    })
+    .then(response => {
+      setUser({
+        ...user,
+        image: response.data.image,
+      });
+    })
+    .catch(err => console.log(err))
+  }, [setUser, user]);
+
+  
 
 const getMyRecipes = () => {
   const storedToken = localStorage.getItem("authToken");
@@ -54,13 +73,95 @@ const myFilteredRecipes = myRecipes.filter((recipe) => {
     && (courseType === '' || recipe.courseType === courseType);
 });
 
-console.log('myRecipes' + myRecipes)
+const reversedRecipes = [...myFilteredRecipes].reverse();
+
+const deleteUser = () => {
+  const storedToken = localStorage.getItem('authToken');
+
+  axios.delete(`${API_URL}/auth/user/delete`, {
+    headers: { Authorization: `Bearer ${storedToken}` },
+  })
+  .then((response) => {
+    if (response.status === 200) {
+      // User account has been deleted, so redirect to login page
+      logOutUser()
+    } else {
+      console.log('Server responded with status:', response.status);
+    }
+  })
+};
+
+const handleFileUpload = (e) => {
+  console.log("handleFileUpload called");
+  const storedToken = localStorage.getItem('authToken');
+  const uploadData = new FormData();
+   
+  uploadData.append("image", e.target.files[0]);
+   
+  console.log("Sending axios post request");
+  axios.post(`${API_URL}/api/user/upload`, uploadData, {
+    headers: { Authorization: `Bearer ${storedToken}` },
+  })
+  .then(response => {
+    setImageUrl(response.data.fileUrl);
+    axios.put("http://localhost:5005/api/users", { image: response.data.fileUrl }, {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    })
+    .then(response => {
+      setUser({
+        ...user,
+        image: response.data.image,
+      });
+    })
+    .catch(err => console.log(err))
+  })
+  .catch(err => console.log("Error while uploading the file: ", err));
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const storedToken = localStorage.getItem('authToken');
+  const data = new FormData();
+  data.append('image', e.target.image.files[0]);
+
+  axios.put("http://localhost:5005/api/users", { image: imageUrl }, {
+    headers: { Authorization: `Bearer ${storedToken}` },
+  })
+  .then(response => {
+    setUser({
+      ...user,
+      image: response.data.image,
+    });
+    setImageUrl(response.data.image);
+  })
+  .catch(err => console.log(err))
+  }
 
 return (
   <div className={'myRecipes ' + theme}>
- 
- <img src={defaultProfileImage} alt='profileImg' id='defaultProfilePic'/>
-   
+
+
+ <section id='userInfo'>
+ <img alt='profile_image' src={user.image ? user.image : defaultProfile} id='defaultProfilePic'/>
+ <form onSubmit={handleSubmit} className='uploadimage'>
+                            <input type="file" name="imageUrl" onChange={(e) => handleFileUpload(e)} />
+                            
+                        </form>
+        {showDeleteConfirmation ? ( 
+          <>
+            <h4 id='checking'>Are you sure you want to delete your account?!</h4>
+            <div id='yesNo'>
+            <p onClick={() => deleteUser()} id='yes'>Yes</p>
+            <p onClick={() => setShowDeleteConfirmation(false)} id='no'>No</p>
+            </div>
+          </>
+        ) : ( // Render Delete Account element with click event handler to show delete confirmation
+          <p id='deleteAccount' onClick={() => setShowDeleteConfirmation(true)}>Delete Account</p>
+        )}
+<p style={{fontWeight: 'bold'}} id='userName'>{user.name}</p>
+ </section>
+
+
    <section className='profileMain'>
     <h2 className='myRecipesTitle'>My Recipes</h2>
 
@@ -73,12 +174,14 @@ return (
 
       </section>
 
-      <section className="courseTypeFilter">
-      <p>Course Type:</p>
+      <section >
+      <div id="courseTypeSelect">
+      <p className='courseType'>Course Type:</p>
         <Select
           value={courseType}
           onChange={(value) => setCourseType(value)}
-          style={{ width: 200 }}>
+          style={{ width: 200 }}
+          className="courseTypeFilter">
 
           <Select.Option value="">All</Select.Option>
           <Select.Option value="Starter">Starter</Select.Option>
@@ -88,6 +191,7 @@ return (
           <Select.Option value="Breakfast">Breakfast</Select.Option>
           <Select.Option value="Other">Other</Select.Option>
         </Select>
+        </div>
       </section>
 
       <section className="veggieCheckboxes">
@@ -116,13 +220,13 @@ return (
       {loading ? <ClipLoader color="#36d7b7" /> : null}
 
       <Row style={{ width: '100%', justifyContent: 'center' }}>
-      { myFilteredRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
+      { reversedRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
       </Row>
 
       {(myRecipes.length === 0) ? (
         <div className='noRecipes'>
           <h3>You haven't added any Recipes! Get Cooking!</h3>
-          <img src={noRecipes} height={325} width={300}/>
+          <img src={noRecipes} height={325} width={300} alt='No Recipes'/>
         </div>
 ) : null}
 
