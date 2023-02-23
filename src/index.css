@@ -182,6 +182,12 @@ textarea {
   padding-top: 20px;
 }
 
+.recipeDetails{
+  margin-left: 10vw;
+  margin-right: 10vw;
+  text-align: justify;
+}
+
 #sunMoon{
   width: 20px;
   height: 20px;
