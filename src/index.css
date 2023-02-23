@@ -400,7 +400,7 @@ cursor: pointer;
 }
 
 #checking{
-  max-width: 15vh;
+  max-width: 30vh;
   margin-left: 5vw;
   margin-top: 30vh;
   position: absolute;
@@ -412,7 +412,7 @@ cursor: pointer;
   display: flex;
   flex-direction: row;
   margin-left: 7vw;
-  margin-top: 20vh;
+  margin-top: 10vh;
 }
 
 #yes{
