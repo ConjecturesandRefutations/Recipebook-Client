@@ -387,17 +387,16 @@ float: left;
 
 #deleteAccount{
   margin-top: 5vh;
+  margin-left: 5vw;
 }
 
 #deleteAccount:hover{
 cursor: pointer;
 }
 
-.uploadProfilePic{
-  margin-left: 3.8vw;
-  margin-top: 20vh;
-  position: absolute;
-}
+ .uploadimage{
+  margin-left: 3vw;  
+} 
 
 #checking{
   max-width: 30vh;
@@ -514,4 +513,9 @@ margin-left: 22vw;
   height: 10vh;
   width: 5vw;
   margin-left: 2vw
+}
+
+#userName{
+  position: absolute;
+  margin-left: 20vw;
 }

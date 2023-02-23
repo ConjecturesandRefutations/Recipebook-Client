@@ -139,7 +139,7 @@ const handleSubmit = (e) => {
 
 return (
   <div className={'myRecipes ' + theme}>
- 
+
 
  <section id='userInfo'>
  <img alt='profile_image' src={user.image ? user.image : defaultProfile} id='defaultProfilePic'/>
@@ -158,7 +158,7 @@ return (
         ) : ( // Render Delete Account element with click event handler to show delete confirmation
           <p id='deleteAccount' onClick={() => setShowDeleteConfirmation(true)}>Delete Account</p>
         )}
-
+<p style={{fontWeight: 'bold'}} id='userName'>{user.name}</p>
  </section>
 
 
