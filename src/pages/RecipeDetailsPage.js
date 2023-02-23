@@ -24,6 +24,10 @@ function RecipeDetailsPage (props) {
   const [creatorImage, setCreatorImage] = useState('');
 
   const { theme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   const getRecipe = () => {
     const storedToken = localStorage.getItem('authToken');
