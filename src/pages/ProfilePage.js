@@ -44,7 +44,7 @@ const ProfilePage = () => {
       });
     })
     .catch(err => console.log(err))
-  }, [setUser, user]);
+  }, []);
 
   
 
@@ -104,7 +104,7 @@ const handleFileUpload = (e) => {
   })
   .then(response => {
     setImageUrl(response.data.fileUrl);
-    axios.put("http://localhost:5005/api/users", { image: response.data.fileUrl }, {
+    axios.put(`${API_URL}/api/users`, { image: response.data.fileUrl }, {
       headers: { Authorization: `Bearer ${storedToken}` },
     })
     .then(response => {
@@ -124,7 +124,7 @@ const handleSubmit = (e) => {
   const data = new FormData();
   data.append('image', e.target.image.files[0]);
 
-  axios.put("http://localhost:5005/api/users", { image: imageUrl }, {
+  axios.put(`${API_URL}/api/users`, { image: imageUrl }, {
     headers: { Authorization: `Bearer ${storedToken}` },
   })
   .then(response => {
