@@ -7,6 +7,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { ThemeContext } from './../context/theme.context'; 
 import { AuthContext } from './../context/auth.context'
 
+import defaultProfile from '../images/defaultProfile.jpg';
+
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 
@@ -19,6 +21,7 @@ function RecipeDetailsPage (props) {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [creatorName, setCreatorName] = useState('');
+  const [creatorImage, setCreatorImage] = useState('');
 
   const { theme } = useContext(ThemeContext);
   
@@ -84,6 +87,7 @@ function RecipeDetailsPage (props) {
       .then((response) => {
         const creator = response.data;
         setCreatorName(creator.name);
+        setCreatorImage(creator.image)
       })
       .catch((error) => console.log(error));
   };
@@ -96,11 +100,16 @@ function RecipeDetailsPage (props) {
   return (
     <div className={"RecipeDetails " + theme}>
 
+{console.log(creatorImage)}
+
 {loading ? <ClipLoader color="#36d7b7" /> : null}
 
       {recipe && (
         <>
-             <div className="creatorName"><p>Recipe Created By: </p><p style={{fontWeight:'bold'}}>{creatorName}</p></div>
+             <div className="creatorName"><span>Recipe Created By: </span><span style={{fontWeight:'bold'}} id='creator'>{creatorName}</span>
+             <img alt="creator-image" src={creatorImage ? creatorImage : defaultProfile} id='creatorImage'/>
+             </div>
+
           <h1>{recipe.name}</h1>
           <p style={{ color: 'green', fontWeight: 'bold' }}>{recipe.isVegetarian ? 'Vegetarian 🍃' : '' }</p>
           <p style={{ color: 'green', fontWeight: 'bold' }}>{recipe.isVegan ? 'Vegan 🍃' : ''}</p>

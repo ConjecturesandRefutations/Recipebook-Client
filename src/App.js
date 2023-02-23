@@ -15,7 +15,6 @@ import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
 
 
-
 function App() {
 
   return (

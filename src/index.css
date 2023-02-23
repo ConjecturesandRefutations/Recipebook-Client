@@ -384,12 +384,19 @@ flex-direction: column;
 float: left;
 }
 
+
 #deleteAccount{
-  margin-left: 8vw;
+  margin-top: 5vh;
 }
 
 #deleteAccount:hover{
 cursor: pointer;
+}
+
+.uploadProfilePic{
+  margin-left: 3.8vw;
+  margin-top: 20vh;
+  position: absolute;
 }
 
 #checking{
@@ -475,6 +482,29 @@ color: white;
  padding: 0 5px 0 5px;  
 }
 
-.creatorName p:last-child {
-  margin-left: 10px;
+#creator{
+  margin-left: 5px
+}
+
+ .courseType{
+  margin-right: 20vw; 
+} 
+
+#courseTypeSelect{
+  display: flex;
+  flex-direction: column;
+}
+
+.courseTypeFilter{
+margin-left: 22vw;
+}
+
+#uploadimage{
+  margin-left: 5vw;
+}
+
+#creatorImage{
+  height: 10vh;
+  width: 5vw;
+  margin-left: 2vw
 }

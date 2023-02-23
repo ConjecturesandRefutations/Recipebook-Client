@@ -10,15 +10,14 @@ import SearchBar from "../components/Search";
 import { AuthContext } from './../context/auth.context'
 import { ThemeContext } from './../context/theme.context'; 
 
-import defaultProfileImage from '../images/defaultProfile.jpg';
+import defaultProfile from '../images/defaultProfile.jpg';
 import noRecipes from '../images/hungry.jpg'
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 const ProfilePage = () => {
   const { theme } = useContext(ThemeContext);
-  const { user } = useContext(AuthContext);
-  const { logOutUser } = useContext(AuthContext);
+  const { user, logOutUser, setUser } = useContext(AuthContext);
 
   const [myRecipes, setMyRecipes] = useState([]);
   const [displayForm, setDisplayForm] = useState(false)
@@ -27,10 +26,27 @@ const ProfilePage = () => {
   const [isVegetarian, setIsVegetarian] = useState(false);
   const [query, setQuery] = useState('');
   const [courseType, setCourseType] = useState('');
-  
 
   const [loading, setLoading] = useState(true);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+
+  const [imageUrl, setImageUrl] = useState("");
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('authToken');
+    axios.get(`${API_URL}/api/users`, {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    })
+    .then(response => {
+      setUser({
+        ...user,
+        image: response.data.image,
+      });
+    })
+    .catch(err => console.log(err))
+  }, [setUser, user]);
+
+  
 
 const getMyRecipes = () => {
   const storedToken = localStorage.getItem("authToken");
@@ -75,14 +91,63 @@ const deleteUser = () => {
   })
 };
 
+const handleFileUpload = (e) => {
+  console.log("handleFileUpload called");
+  const storedToken = localStorage.getItem('authToken');
+  const uploadData = new FormData();
+   
+  uploadData.append("image", e.target.files[0]);
+   
+  console.log("Sending axios post request");
+  axios.post(`${API_URL}/api/user/upload`, uploadData, {
+    headers: { Authorization: `Bearer ${storedToken}` },
+  })
+  .then(response => {
+    setImageUrl(response.data.fileUrl);
+    axios.put("http://localhost:5005/api/users", { image: response.data.fileUrl }, {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    })
+    .then(response => {
+      setUser({
+        ...user,
+        image: response.data.image,
+      });
+    })
+    .catch(err => console.log(err))
+  })
+  .catch(err => console.log("Error while uploading the file: ", err));
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const storedToken = localStorage.getItem('authToken');
+  const data = new FormData();
+  data.append('image', e.target.image.files[0]);
+
+  axios.put("http://localhost:5005/api/users", { image: imageUrl }, {
+    headers: { Authorization: `Bearer ${storedToken}` },
+  })
+  .then(response => {
+    setUser({
+      ...user,
+      image: response.data.image,
+    });
+    setImageUrl(response.data.image);
+  })
+  .catch(err => console.log(err))
+  }
 
 return (
   <div className={'myRecipes ' + theme}>
  
 
  <section id='userInfo'>
-        <img src={defaultProfileImage} alt='profileImg' id='defaultProfilePic'/>
-        {showDeleteConfirmation ? ( // Render delete confirmation if showDeleteConfirmation is true
+ <img alt='profile_image' src={user.image ? user.image : defaultProfile} id='defaultProfilePic'/>
+ <form onSubmit={handleSubmit}>
+                            <input type="file" name="imageUrl" onChange={(e) => handleFileUpload(e)} id='uploadimage'/>
+                            
+                        </form>
+        {showDeleteConfirmation ? ( 
           <>
             <h4 id='checking'>Are you sure you want to delete your account?!</h4>
             <div id='yesNo'>
@@ -109,12 +174,14 @@ return (
 
       </section>
 
-      <section className="courseTypeFilter">
-      <p>Course Type:</p>
+      <section >
+      <div id="courseTypeSelect">
+      <p className='courseType'>Course Type:</p>
         <Select
           value={courseType}
           onChange={(value) => setCourseType(value)}
-          style={{ width: 200 }}>
+          style={{ width: 200 }}
+          className="courseTypeFilter">
 
           <Select.Option value="">All</Select.Option>
           <Select.Option value="Starter">Starter</Select.Option>
@@ -124,6 +191,7 @@ return (
           <Select.Option value="Breakfast">Breakfast</Select.Option>
           <Select.Option value="Other">Other</Select.Option>
         </Select>
+        </div>
       </section>
 
       <section className="veggieCheckboxes">
