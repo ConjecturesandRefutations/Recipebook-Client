@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import defaultProfile from '../images/defaultProfile.jpg'
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
@@ -9,7 +10,17 @@ function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
-  
+  const [state, setState] = useState({
+    defaultProfile: {defaultProfile},
+  });
+  const updateProfileImage = (imageUrl) => {
+    setUser((prevUser) => {
+      return { ...prevUser, image: imageUrl };
+    });
+
+    // Store the updated user object in local storage
+    localStorage.setItem('user', JSON.stringify({ ...user, image: imageUrl }));
+  };
   const storeToken = (token) => {
     localStorage.setItem("authToken", token);
   }  
@@ -68,7 +79,7 @@ function AuthProviderWrapper(props) {
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, isLoading, user, setUser, storeToken, authenticateUser, logOutUser }}
+      value={{ isLoggedIn, isLoading, user, setUser, storeToken, authenticateUser, logOutUser, state, setState, updateProfileImage }}
     >
       {props.children}
     </AuthContext.Provider>

@@ -14,8 +14,6 @@ import LoginPage from "./pages/LoginPage";
 import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
 
-import Test from './pages/Test';
-
 
 function App() {
 
@@ -30,7 +28,6 @@ function App() {
         <Route exact path="/recipes/edit/:recipeId" element={<IsPrivate><EditRecipePage /></IsPrivate>} /> 
         <Route exact path="/recipes/user/:userId" element={<IsPrivate><ProfilePage/></IsPrivate>} />
         <Route exact path="/recipes/random" element={<IsPrivate><RandomRecipe/></IsPrivate>} />
-        <Route exact path="/recipes/test" element={<IsPrivate><Test/></IsPrivate>} />
 
         <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>} />
         <Route path="/login" element={<IsAnon> <LoginPage /> </IsAnon>} />

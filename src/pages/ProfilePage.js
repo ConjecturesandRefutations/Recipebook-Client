@@ -10,15 +10,14 @@ import SearchBar from "../components/Search";
 import { AuthContext } from './../context/auth.context'
 import { ThemeContext } from './../context/theme.context'; 
 
-import defaultProfileImage from '../images/defaultProfile.jpg';
+import defaultProfile from '../images/defaultProfile.jpg';
 import noRecipes from '../images/hungry.jpg'
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 const ProfilePage = () => {
   const { theme } = useContext(ThemeContext);
-  const { user } = useContext(AuthContext);
-  const { logOutUser, setUser } = useContext(AuthContext);
+  const { user, logOutUser, setUser } = useContext(AuthContext);
 
   const [myRecipes, setMyRecipes] = useState([]);
   const [displayForm, setDisplayForm] = useState(false)
@@ -32,6 +31,20 @@ const ProfilePage = () => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
   const [imageUrl, setImageUrl] = useState("");
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('authToken');
+    axios.get(`${API_URL}/api/users`, {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    })
+    .then(response => {
+      setUser({
+        ...user,
+        image: response.data.image,
+      });
+    })
+    .catch(err => console.log(err))
+  }, [setUser, user]);
 
   
 
@@ -79,41 +92,60 @@ const deleteUser = () => {
 };
 
 const handleFileUpload = (e) => {
-
+  console.log("handleFileUpload called");
+  const storedToken = localStorage.getItem('authToken');
   const uploadData = new FormData();
-
-  uploadData.append("imageUrl", e.target.files[0]);
-
-  axios.post("http://localhost:5005/api/upload", uploadData)
-    .then(response => {
-      setImageUrl(response.data.fileUrl);
+   
+  uploadData.append("image", e.target.files[0]);
+   
+  console.log("Sending axios post request");
+  axios.post(`${API_URL}/api/user/upload`, uploadData, {
+    headers: { Authorization: `Bearer ${storedToken}` },
+  })
+  .then(response => {
+    setImageUrl(response.data.fileUrl);
+    axios.put("http://localhost:5005/api/users", { image: response.data.fileUrl }, {
+      headers: { Authorization: `Bearer ${storedToken}` },
     })
-    .catch(err => console.log("Error while uploading the file: ", err));
+    .then(response => {
+      setUser({
+        ...user,
+        image: response.data.image,
+      });
+    })
+    .catch(err => console.log(err))
+  })
+  .catch(err => console.log("Error while uploading the file: ", err));
 };
 
 const handleSubmit = (e) => {
   e.preventDefault();
   const storedToken = localStorage.getItem('authToken');
-  axios.put(`${API_URL}/api/users`, 
-                          {image: imageUrl},
-                          { headers: { Authorization: `Bearer ${storedToken}`} })
-      .then(response => {
-          console.log(' put response data', response.data)
-          setUser(response.data)
-          setImageUrl('')
-      })
-      .catch(err => console.log(err))
-}
+  const data = new FormData();
+  data.append('image', e.target.image.files[0]);
+
+  axios.put("http://localhost:5005/api/users", { image: imageUrl }, {
+    headers: { Authorization: `Bearer ${storedToken}` },
+  })
+  .then(response => {
+    setUser({
+      ...user,
+      image: response.data.image,
+    });
+    setImageUrl(response.data.image);
+  })
+  .catch(err => console.log(err))
+  }
 
 return (
   <div className={'myRecipes ' + theme}>
  
 
  <section id='userInfo'>
- <img alt='profile_image' src={user.image ? user.image : defaultProfileImage} id='defaultProfilePic'/>
+ <img alt='profile_image' src={user.image ? user.image : defaultProfile} id='defaultProfilePic'/>
  <form onSubmit={handleSubmit}>
-                            <input type="file" name="imageUrl" onChange={(e) => handleFileUpload(e)} />
-                            <button type="submit">Update User Image</button>
+                            <input type="file" name="imageUrl" onChange={(e) => handleFileUpload(e)} id='uploadimage'/>
+                            
                         </form>
         {showDeleteConfirmation ? ( 
           <>
