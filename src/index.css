@@ -402,6 +402,7 @@ cursor: pointer;
 #checking{
   max-width: 15vh;
   margin-left: 5vw;
+  margin-top: 30vh;
   position: absolute;
   color: red;
   font-weight: bold;
@@ -411,6 +412,7 @@ cursor: pointer;
   display: flex;
   flex-direction: row;
   margin-left: 7vw;
+  margin-top: 20vh;
 }
 
 #yes{
