@@ -5,6 +5,8 @@ import { Button } from 'antd';
 import React from "react";
 import { Link } from "react-router-dom";
 
+import cutlery from '../images/cutlerynoback.png'
+
 function HomePage() {
   const { theme } = useContext(ThemeContext);
   const { user } = useContext(AuthContext);
@@ -13,15 +15,14 @@ function HomePage() {
     const myCanvas = document.getElementById('canvas');
     const ctx = myCanvas.getContext('2d');
 
-
     let x = 0;
     let y = 0;
     let directionX = 1;
     let directionY = 1;
-    let speed = 1.5;
+    let speed = 2;
   
     const image = new Image();
-    image.src = 'https://th.bing.com/th/id/R.5e5b805247c9741ed413a65836705b8f?rik=1XfCwCncEBTLmg&pid=ImgRaw&r=0';
+    image.src = cutlery;
   
     image.onload = () => {
       function animate() {

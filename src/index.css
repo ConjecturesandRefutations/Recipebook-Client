@@ -172,8 +172,7 @@ textarea {
 }
 
 .RecipeListPage{
-  height: 100vh;
-  padding-bottom: 500px;
+  height: 100%;
   padding-top: 20px;
 }
 
@@ -195,8 +194,7 @@ textarea {
 
 .EditRecipePage {
   height: 100vh; 
-  width: 1330px;
-  padding-right: 20px;
+  width: 100%;
   padding-top: 20px;
 }
 
@@ -233,15 +231,13 @@ textarea {
 
 .loginPage{
   height: 100vh; 
-  width: 1330px;
-  padding-right: 20px;
+  width: 100%;
   padding-top: 20px;
 }
 
 .signupPage{
   height: 100vh; 
-  width: 1330px;
-  padding-right: 20px;
+  width: 100%;
   padding-top: 20px;
 }
 
@@ -268,11 +264,12 @@ textarea {
 
 .navbarLoggedOut{
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .toggleTheme{
-margin-left: 900px;
+  margin-right: 10vw;
 }
 
 .toggleThemeTwo{
@@ -377,8 +374,8 @@ margin-left: 900px;
 }
 
 #defaultProfilePic{
-  max-height: 20vh;
-  max-width: 20vw;
+  height: 22vh;
+  width: 12vw;
   float: left;
   margin-left: 10vw;
   border-radius: 50%;
@@ -440,7 +437,7 @@ cursor: pointer;
 
 .myRecipes{
   padding-top: 20px;
-  height: 100vh;
+  height: 100%;
 }
 
 #everyUser{
@@ -479,7 +476,7 @@ color: white;
   margin-top: 50px;
 }
 
-.creatorName{
+.creatorDetails{
  display: flex;
  flex-direction: row;
  position: absolute;
@@ -487,6 +484,13 @@ color: white;
  background-color: whitesmoke;
  border-radius: 5px;
  padding: 0 5px 0 5px;  
+ margin-left: 10vw;
+}
+
+.creatorName{
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
 }
 
 #creator{
@@ -524,4 +528,16 @@ margin-left: 22vw;
 #userName{
   position: absolute;
   margin-left: 20vw;
+}
+
+.clip{
+  position: absolute;
+}
+
+/* Below are media queries for responsivity */
+
+@media (max-width: 768px) {
+  .cutlery {
+    display: none;
+  }
 }

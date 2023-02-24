@@ -111,6 +111,7 @@ function RecipeListPage() {
       {(recipes.length === 0) ? (
         <div className='noRecipes'>
           <h3>Nobody has added a Recipe! Be the First!</h3>
+          <ClipLoader color="red" className='clip'/>
           <img src={noRecipes} alt='noRecipes' height={325} width={300}/>
         </div>
 ) : null}

@@ -225,6 +225,7 @@ return (
 
       {(myRecipes.length === 0) ? (
         <div className='noRecipes'>
+          <ClipLoader color="red" className='clip'/>
           <h3>You haven't added any Recipes! Get Cooking!</h3>
           <img src={noRecipes} height={325} width={300} alt='No Recipes'/>
         </div>
