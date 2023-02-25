@@ -89,7 +89,7 @@ textarea {
   background-color: red;
 }
 
-#recipeCard{
+.recipeCard{
   width: 230px; 
   height: 300px; 
   margin: 10px;
@@ -97,6 +97,11 @@ textarea {
   box-shadow: 0px 2px 3px grey;
   color: black;
   background-color: whitesmoke;
+}
+
+.recipePic{
+  height:200px; 
+  width:175px
 }
 
 #recipeCard:hover {
@@ -346,6 +351,22 @@ textarea {
   border-radius: 5px;
 }
 
+.smallLogo{
+  border-radius: 5px;
+  margin-top: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  width: 405px;
+}
+
+.smallLogoLogin{
+  border-radius: 5px;
+  margin-top: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  width: 277px;
+}
+
 .errorPage{
   height: 100vh;
   padding-top: 10px;
@@ -552,8 +573,20 @@ margin-left: 22vw;
   }
 }
 
-@media (max-width: 936px) {
+@media (max-width: 935px) {
   .logo {
+    display: none;
+  }
+}
+
+@media (min-width: 936px) {
+  .smallLogo {
+    display: none;
+  }
+}
+
+@media (min-width: 936px) {
+  .smallLogoLogin {
     display: none;
   }
 }
@@ -579,10 +612,17 @@ margin-left: 22vw;
   }
 }
 
-@media (max-width: 630px) {
+@media (max-width: 700px) {
   #signupInput {
     position: absolute;
     left: 100px;
+  }
+}
+
+@media (max-width: 630px) {
+  #signupInput {
+    position: absolute;
+    left: 50px;
   }
 }
 
@@ -601,6 +641,12 @@ margin-left: 22vw;
 @media (max-width: 550px) {
   .toggleThemeTwo {
     margin-right: 10px;
+  }
+}
+
+@media (max-width: 320px) {
+  .toggleThemeTwo {
+    flex-direction: column;
   }
 }
 
@@ -644,3 +690,61 @@ margin-left: 22vw;
     font-size: 1rem;
   }
 }
+
+  @media (max-width: 1016px) {
+    .recipeCard {
+      width: 80%;
+      height: 80%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0px;
+    }
+    .recipePic{
+      height: 172px;
+    width: 150px;
+    justify-content: center;
+    }
+    .recipeName{
+      font-size: small;
+    }
+    #table {
+      padding: 0px;
+    }
+    .recipeList{
+       display: flex; 
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 766px) {
+    .recipeCard {
+      width: 70%;
+      height: 70%;
+      margin: 0px;
+      padding: 0px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .recipePic{
+      height: 100px;
+    width: 70px;
+    justify-content: center;
+      margin-bottom: -20px;
+    }
+    .recipeName{
+      font-size: x-small;
+      position: absolute;
+      top: 0px;
+    }
+    .recipeList{
+      display: flex; 
+     flex-wrap: wrap;
+     margin: 0px;
+   }
+  }

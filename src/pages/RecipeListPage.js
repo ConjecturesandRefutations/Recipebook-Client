@@ -104,7 +104,7 @@ function RecipeListPage() {
 
       {loading ? <ClipLoader color="#36d7b7" /> : null}
 
-      <Row style={{ width: '100%', justifyContent: 'center' }}>
+      <Row style={{ width: '100%',  justifyContent: 'center'  }} className='recipeList'>
       { reversedRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
       </Row>
 
