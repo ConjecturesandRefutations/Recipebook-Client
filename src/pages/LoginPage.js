@@ -64,7 +64,7 @@ function LoginPage(props) {
 {loading ? <ClipLoader color="#36d7b7" className="clipLoader"/> : null}
 
 
-      <div id="loginInput">
+      <section id="loginInput">
       <h1>Login</h1>
 
       <form onSubmit={handleLoginSubmit} className='loginSignupForm'>
@@ -80,7 +80,7 @@ function LoginPage(props) {
 
       <p className="redirectMessages">Don't have an account yet?</p>
       <Link to={"/signup"}> Sign Up</Link>
-      </div>
+      </section>
 
       <img src={changeLogoSrc(theme)} alt="recipeLogo" className="logo"/>
     </div>
