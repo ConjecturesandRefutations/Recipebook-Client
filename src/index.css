@@ -645,6 +645,36 @@ margin-left: 600px;
   }
 }
 
+@media (max-width: 411px) {
+  .smallLogo {
+    position: absolute;
+    left: 50px;
+  }
+  #loginInput{
+    position: absolute;
+    left: 50px;
+  }
+  #authButtons{
+    position: absolute;
+    left: 50px;
+  }
+}
+
+@media (max-width: 350px) {
+  .smallLogo {
+    position: absolute;
+    left: 0px;
+  }
+  #loginInput{
+    position: absolute;
+    left: 0px;
+  }
+  #authButtons{
+    position: absolute;
+    left: 0px;
+  }
+}
+
 @media (max-width: 580px) {
   #pageSelect {
     margin-left: 50px;
