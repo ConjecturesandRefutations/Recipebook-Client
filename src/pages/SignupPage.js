@@ -86,7 +86,7 @@ const handleSubmit = (e) => {
 {loading ? <ClipLoader color="#36d7b7" className="clipLoader"/> : null}
 
 <div id="signupInput">
-<img src={changeSmallLogoSrc(theme)} alt="recipeLogo" className="smallLogo"/>
+<img src={changeSmallLogoSrc(theme)} alt="recipeLogo" className="smallLogoSL"/>
       <h1>Sign Up</h1>
 
       <form onSubmit={handleSubmit} className='loginSignupForm'>
