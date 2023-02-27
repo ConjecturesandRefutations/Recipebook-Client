@@ -77,7 +77,7 @@ function changeSmallLogoSrc(theme){
 
       <section id="loginInput">
   
-      <img src={changeSmallLogoSrc(theme)} alt="recipeLogo" className="smallLogoLogin"/>
+      <img src={changeSmallLogoSrc(theme)} alt="recipeLogo" className="smallLogoSL"/>
     
       <h1>Login</h1>
 
