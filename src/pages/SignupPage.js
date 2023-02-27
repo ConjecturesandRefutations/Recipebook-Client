@@ -10,6 +10,8 @@ import axios from "axios";
 
 import lightLogo from '../images/lightLogo.png'
 import darkLogo from '../images/darkLogo.png'
+import lightSlogo from '../images/lightSlogo.png'
+import darkSlogo from '../images/darkSlogo.png'
 
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
@@ -41,6 +43,13 @@ function SignupPage(props) {
     }
 };
 
+function changeSmallLogoSrc(theme){
+  if (theme === 'dark'){
+    return darkSlogo
+  } else {
+     return lightSlogo
+  }
+};
   
 const handleSubmit = (e) => {
   e.preventDefault();
@@ -77,6 +86,7 @@ const handleSubmit = (e) => {
 {loading ? <ClipLoader color="#36d7b7" className="clipLoader"/> : null}
 
 <div id="signupInput">
+<img src={changeSmallLogoSrc(theme)} alt="recipeLogo" className="smallLogo"/>
       <h1>Sign Up</h1>
 
       <form onSubmit={handleSubmit} className='loginSignupForm'>

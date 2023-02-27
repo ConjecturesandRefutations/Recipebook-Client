@@ -1,19 +1,22 @@
 import { Link } from "react-router-dom";
 import { Card, Col } from 'antd';
 
+
+
+
 function RecipeCard ( { name, imgUrl, _id } ) {
 
   return (
-    <div className="RecipeCard">
-      <Col id='table'>
+    <div>
+      <Col id='table' style={{ padding: 0 }}>
       <Link to={`/recipes/${_id}`}>
-        <Card id="recipeCard">
-        <h3>{name}</h3>
-        <img src={imgUrl} alt="recipe" height={200} width={175} id='recipePic'/>
+        <Card className="recipeCard" >
+        <h3 className="recipeName">{name}</h3>
+        <img src={imgUrl} alt="recipe" className='recipePic'/>
       </Card>
       </Link>
       </Col>
-    </div>
+      </div>
   );
 }
 

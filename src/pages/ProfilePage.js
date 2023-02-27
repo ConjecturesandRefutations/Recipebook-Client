@@ -161,75 +161,75 @@ return (
 <p style={{fontWeight: 'bold'}} id='userName'>{user.name}</p>
  </section>
 
+<div>
 
-   <section className='profileMain'>
-    <h2 className='myRecipesTitle'>My Recipes</h2>
+<section className='recenteringProfile'>
 
-<div id='reCentering'>
-    <button onClick={()=> setDisplayForm(!displayForm)} id='showFormToggleTwo'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
-      {displayForm && <AddRecipe refreshRecipes={getMyRecipes} /> }
+ <h2 className='myRecipeTitle'>My Recipes</h2>
 
-      <SearchBar setQueryProp={setQuery}/>
-      </div>
+<button onClick={()=> setDisplayForm(!displayForm)} className='showFormToggleProfile'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
+<div className='addRecipeProfile'>
+{displayForm && <AddRecipe refreshRecipes={getMyRecipes}/>}
 
-      </section>
+<SearchBar setQueryProp={setQuery} id='profileSearch'/>
 
-      <section >
-      <div id="courseTypeSelect">
-      <p className='courseType'>Course Type:</p>
-        <Select
-          value={courseType}
-          onChange={(value) => setCourseType(value)}
-          style={{ width: 200 }}
-          className="courseTypeFilter">
 
-          <Select.Option value="">All</Select.Option>
-          <Select.Option value="Starter">Starter</Select.Option>
-          <Select.Option value="Main">Main</Select.Option>
-          <Select.Option value="Dessert">Dessert</Select.Option>
-          <Select.Option value="Snack">Snack</Select.Option>
-          <Select.Option value="Breakfast">Breakfast</Select.Option>
-          <Select.Option value="Other">Other</Select.Option>
-        </Select>
-        </div>
-      </section>
 
-      <section className="veggieCheckboxes">
+  
+<p>Course Type:</p>
+  <Select
+    value={courseType}
+    onChange={(value) => setCourseType(value)}
+    style={{ width: 200 }}
+    className='courseSelect'>
+    <Select.Option value="">All</Select.Option>
+    <Select.Option value="Starter">Starter</Select.Option>
+    <Select.Option value="Main">Main</Select.Option>
+    <Select.Option value="Dessert">Dessert</Select.Option>
+    <Select.Option value="Snack">Snack</Select.Option>
+    <Select.Option value="Breakfast">Breakfast</Select.Option>
+    <Select.Option value="Other">Other</Select.Option>
+  </Select>
+  </div>
+</section>
 
-      <label>
-        Vegetarian:
-        <input
-          type="checkbox"
-          checked={isVegetarian}
-          onChange={(event) => setIsVegetarian(event.target.checked)}
-        />
-      </label>
+</div>
 
-      <label>
-        Vegan:
-        <input
-          type="checkbox"
-          checked={isVegan}
-          onChange={(event) => setIsVegan(event.target.checked)}
-        />
-      </label>
-      <br />
+<section className="veggieCheckboxes">
+<label>
+  Vegetarian:
+  <input
+    type="checkbox"
+    checked={isVegetarian}
+    onChange={(event) => setIsVegetarian(event.target.checked)}
+  />
+</label>
+<br />
+<label>
+  Vegan:
+  <input
+    type="checkbox"
+    checked={isVegan}
+    onChange={(event) => setIsVegan(event.target.checked)}
+  />
+</label>
+</section>
 
-      </section>
+{loading ? <ClipLoader color="#36d7b7" /> : null}
 
-      {loading ? <ClipLoader color="#36d7b7" /> : null}
+<h3 id='profileRecipes'> My Recipes </h3>
 
-      <Row style={{ width: '100%', justifyContent: 'center' }}>
-      { reversedRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
-      </Row>
+<Row style={{ width: '100%',  justifyContent: 'center'  }} className='recipeList'>
+{ reversedRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
+</Row>
 
-      {(myRecipes.length === 0) ? (
-        <div className='noRecipes'>
-          <h3>You haven't added any Recipes! Get Cooking!</h3>
-          <img src={noRecipes} height={325} width={300} alt='No Recipes'/>
-        </div>
+{(myRecipes.length === 0) ? (
+  <div className='noRecipes'>
+    <h3>You haven't added any recipes! Get cooking!</h3>
+    <ClipLoader color="red" className='clip'/>
+    <img src={noRecipes} alt='noRecipes' height={325} width={300}/>
+  </div>
 ) : null}
-
 
   </div>
 );

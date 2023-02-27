@@ -58,13 +58,14 @@ function RecipeListPage() {
       
 <h2 id="everyUser">All Users' Recipes</h2>
 
-      <button onClick={()=> setDisplayForm(!displayForm)} id='showFormToggle'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
+      <button onClick={()=> setDisplayForm(!displayForm)} className='showFormToggle'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
       {displayForm && <AddRecipe refreshRecipes={getAllRecipes} />}
       
       <SearchBar setQueryProp={setQuery}/>
 
       <section>
         
+      
       <p>Course Type:</p>
         <Select
           value={courseType}
@@ -91,7 +92,7 @@ function RecipeListPage() {
           onChange={(event) => setIsVegetarian(event.target.checked)}
         />
       </label>
-      <br />
+  
       <label>
         Vegan:
         <input
@@ -104,13 +105,14 @@ function RecipeListPage() {
 
       {loading ? <ClipLoader color="#36d7b7" /> : null}
 
-      <Row style={{ width: '100%', justifyContent: 'center' }}>
+      <Row style={{ width: '100%',  justifyContent: 'center'  }} className='recipeList'>
       { reversedRecipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />  )} 
       </Row>
 
       {(recipes.length === 0) ? (
         <div className='noRecipes'>
           <h3>Nobody has added a Recipe! Be the First!</h3>
+          <ClipLoader color="red" className='clip'/>
           <img src={noRecipes} alt='noRecipes' height={325} width={300}/>
         </div>
 ) : null}

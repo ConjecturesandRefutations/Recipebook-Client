@@ -110,7 +110,7 @@ function RecipeDetailsPage (props) {
 
       {recipe && (
         <>
-             <div className="creatorName"><span>Recipe Created By: </span><span style={{fontWeight:'bold'}} id='creator'>{creatorName}</span>
+             <div className="creatorDetails"><div className="creatorName"><span>Recipe Created By: </span><span style={{fontWeight:'bold'}} id='creator'>{creatorName}</span></div>
              <img alt="creator-image" src={creatorImage ? creatorImage : defaultProfile} id='creatorImage'/>
              </div>
 

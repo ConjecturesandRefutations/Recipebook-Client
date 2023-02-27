@@ -60,7 +60,7 @@ function AddRecipe(props) {
         setImgUrl("");
         setIsVegetarian(false)
         setIsVegan(false)
-        setCourseType("");
+        setCourseType("other");
         props.refreshRecipes();
       })
       .catch((error) => console.log(error));

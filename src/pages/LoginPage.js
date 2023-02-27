@@ -5,8 +5,11 @@ import { AuthContext } from "./../context/auth.context";
 import { Input } from 'antd';
 import ClipLoader from "react-spinners/ClipLoader";
 import { ThemeContext } from './../context/theme.context';
+
 import lightLogo from '../images/lightLogo.png'
 import darkLogo from '../images/darkLogo.png'
+import lightSlogo from '../images/lightSlogo.png'
+import darkSlogo from '../images/darkSlogo.png'
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
@@ -35,6 +38,13 @@ function LoginPage(props) {
     }
 };
 
+function changeSmallLogoSrc(theme){
+  if (theme === 'dark'){
+    return darkSlogo
+  } else {
+     return lightSlogo
+  }
+};
   
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -64,7 +74,11 @@ function LoginPage(props) {
 {loading ? <ClipLoader color="#36d7b7" className="clipLoader"/> : null}
 
 
-      <div id="loginInput">
+
+      <section id="loginInput">
+  
+      <img src={changeSmallLogoSrc(theme)} alt="recipeLogo" className="smallLogoLogin"/>
+    
       <h1>Login</h1>
 
       <form onSubmit={handleLoginSubmit} className='loginSignupForm'>
@@ -80,7 +94,8 @@ function LoginPage(props) {
 
       <p className="redirectMessages">Don't have an account yet?</p>
       <Link to={"/signup"}> Sign Up</Link>
-      </div>
+      </section>
+  
 
       <img src={changeLogoSrc(theme)} alt="recipeLogo" className="logo"/>
     </div>
