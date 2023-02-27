@@ -58,13 +58,14 @@ function RecipeListPage() {
       
 <h2 id="everyUser">All Users' Recipes</h2>
 
-      <button onClick={()=> setDisplayForm(!displayForm)} id='showFormToggle'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
+      <button onClick={()=> setDisplayForm(!displayForm)} className='showFormToggle'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
       {displayForm && <AddRecipe refreshRecipes={getAllRecipes} />}
       
       <SearchBar setQueryProp={setQuery}/>
 
       <section>
         
+      
       <p>Course Type:</p>
         <Select
           value={courseType}
@@ -91,7 +92,7 @@ function RecipeListPage() {
           onChange={(event) => setIsVegetarian(event.target.checked)}
         />
       </label>
-      <br />
+  
       <label>
         Vegan:
         <input
