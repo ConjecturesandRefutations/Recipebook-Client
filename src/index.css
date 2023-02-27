@@ -104,7 +104,7 @@ textarea {
   width:175px
 }
 
-#recipeCard:hover {
+.recipeCard:hover {
   background-color: rgb(255, 212, 227);
   transform: scale(1.07);
   box-shadow: 0px 0px 10px lightblue;
@@ -114,7 +114,7 @@ textarea {
   margin-top: 50px;
 }
 
-#showFormToggle{
+.showFormToggle{
   background-color: rgb(137, 207, 240);
   margin-top: 50px;
 }
@@ -129,7 +129,7 @@ textarea {
  
 .Navbar.light {
   background-color: pink;
- box-shadow: 1px 1px 2px  rgb(143, 115, 219); 
+  box-shadow: 1px 1px 2px  rgb(143, 115, 219); 
   max-height: 50px;
   padding-bottom: 15px;
   filter: drop-shadow(2px 2px 2px rgba(21, 120, 128, 0.5));
@@ -311,9 +311,9 @@ textarea {
   border-radius: 5px;
 }
 
-#searchBar{
+.searchBar{
   width: 400px;
-  margin-right: 47px;
+   margin-right: 47px; 
 }
 
 #back{
@@ -386,7 +386,6 @@ textarea {
 .veggieCheckboxes{
   display: flex;
   flex-direction: row;
-  position: absolute;
   margin-left: 34vw;
   color: green;
 }
@@ -396,8 +395,8 @@ textarea {
 }
 
 #defaultProfilePic{
-  height: 22vh;
-  width: 12vw;
+  height: 150px;
+  width: 150px;
   float: left;
   margin-left: 10vw;
   border-radius: 50%;
@@ -411,7 +410,6 @@ float: left;
 
 
 #deleteAccount{
-  margin-top: 5vh;
   margin-left: 5vw;
 }
 
@@ -421,6 +419,7 @@ cursor: pointer;
 
  .uploadimage{
   margin-left: 3vw;  
+  margin-top: 0vh;
 } 
 
 #checking{
@@ -447,10 +446,6 @@ cursor: pointer;
 #no{
   margin-left: 1vw;
   cursor: pointer;
-}
-
-.profileMain{
-   margin-right: 20vw;
 }
 
 #reCentering {
@@ -563,6 +558,14 @@ margin-left: 22vw;
 
 .toggleButtons > img {
   margin-left: 5px;
+}
+
+.recenteringProfile{
+   margin-right: 20vw; 
+}
+
+.addRecipeProfile{
+  margin-left: 20vw;
 }
 
 /* Below are media queries for responsivity */
@@ -748,3 +751,127 @@ margin-left: 22vw;
      margin: 0px;
    }
   }
+
+   @media (max-width: 1009px) {
+    .veggieCheckboxes {
+      margin-left: 29vw;
+    }
+  } 
+
+  @media (max-width: 923px) {
+    .veggieCheckboxes {
+      margin-left: 27vw;
+    }
+  } 
+
+  @media (max-width: 825px) {
+    .veggieCheckboxes {
+      margin-left: 24vw;
+    }
+  } 
+
+  @media (max-width: 690px) {
+    .veggieCheckboxes {
+      margin-left: 19vw;
+    }
+  } 
+
+  @media (max-width: 610px) {
+    .veggieCheckboxes {
+      margin-left: 15vw;
+    }
+  } 
+
+  @media (max-width: 516px) {
+    .veggieCheckboxes {
+      margin-left: 8vw;
+    }
+  } 
+
+  @media (max-width: 452px) {
+    .veggieCheckboxes {
+      margin-left: 1vw;
+    }
+  } 
+
+  @media (max-width: 375px) {
+    .veggieCheckboxes {
+      margin-left: 0vw;
+    }
+  } 
+
+  @media (max-width: 375px) {
+    .veggieCheckboxes {
+      margin-left: -5vw;
+    }
+  } 
+
+  @media (max-width: 334px) {
+    .veggieCheckboxes {
+      margin-left: -20vw;
+      font-size: x-small;
+      flex-direction: column;
+      padding: 0;
+    }
+  } 
+
+  @media (max-width: 1002px) {
+    .myRecipeTitle {
+      display: none;
+    }
+    #userInfo{
+      display: inline-block;
+      vertical-align: top;
+      top: 0;
+      float: none;
+    }
+    #userName{
+      margin-top: -150px;
+    }
+    #profileRecipes{
+      font-size: small;
+    }
+    .showFormToggleProfile{
+      margin-top: 0px;
+      margin-left: 250px;
+    }
+  } 
+
+  @media (max-width: 850px) {
+    .showFormToggleProfile{
+      margin-left: 200px;
+    }
+  } 
+
+  @media (max-width: 680px) {
+    .showFormToggleProfile{
+      margin-left: 175px;
+    }
+  } 
+
+
+  @media (max-width: 725px) {
+    .showFormToggleProfile{
+      margin-left: 150px;
+    }
+  } 
+
+  @media (max-width: 500px) {
+    .showFormToggleProfile{
+      margin-left: 100px;
+    }
+  } 
+
+   @media (max-width: 500px) {
+  
+    .searchBar{
+    position: absolute;
+    left: 0;
+    }
+  }  
+
+  @media (min-width: 1002px) {
+    .myRecipes {
+      margin-left: 0px;
+    }
+  } 
