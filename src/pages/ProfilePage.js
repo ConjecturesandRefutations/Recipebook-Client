@@ -165,7 +165,7 @@ return (
 
 <section className='recenteringProfile'>
 
- <h2 className='myRecipeTitle'>My Recipes</h2>
+ <h2 className='myRecipesTitle'>My Recipes</h2>
 
 <button onClick={()=> setDisplayForm(!displayForm)} className='showFormToggleProfile'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
 
