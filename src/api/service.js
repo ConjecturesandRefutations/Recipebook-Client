@@ -20,8 +20,8 @@ const getRecipes = () => {
     .catch(errorHandler);
 };
  
-const uploadImage = (file) => {
-  const storedToken = localStorage.getItem('authToken');
+const uploadImage = async (file) => {
+  const storedToken = await localStorage.getItem('authToken');
   return api.post("/api/upload", file, { Authorization: `Bearer ${storedToken}` } )
     .then(res => res.data)
     .catch(errorHandler);
