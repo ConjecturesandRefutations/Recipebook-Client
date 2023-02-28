@@ -863,7 +863,7 @@ margin-left: 600px;
 
   @media (min-width: 1003px) {
     #profileRecipes{
-      color: red;
+      display: none;
     }
   } 
 
