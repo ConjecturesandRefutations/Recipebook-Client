@@ -916,6 +916,18 @@ margin-left: 600px;
     }
   }  
 
+  @media (max-width: 350px) {
+.AddRecipe{
+   margin-left: -60px 
+}
+  }  
+
+  @media (max-width: 300px) {
+    .AddRecipe{
+       margin-left: -50px 
+    }
+      }  
+
   @media (min-width: 1002px) {
     .myRecipes {
       margin-left: 0px;

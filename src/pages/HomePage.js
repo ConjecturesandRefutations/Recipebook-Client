@@ -51,8 +51,8 @@ function HomePage() {
       <div className={'HomePage ' + theme}>
         <h1 id='title'>Recipebook</h1>
         <p id='welcome'>Hello {user && user.name}!</p>
-        <Link to={"/recipes/user/:userId"}><Button className='homeButtons'>Profile Page</Button></Link>
         <Link to={"/recipes/"}><Button className='homeButtons'>All Recipes</Button></Link>
+        <Link to={"/recipes/user/:userId"}><Button className='homeButtons'>Profile Page</Button></Link>
         <Link to={"/recipes/random"}><Button className='homeButtons'>Need Inspiration?</Button></Link>
         <br/>
         <br/>
