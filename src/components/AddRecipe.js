@@ -70,7 +70,7 @@ function AddRecipe(props) {
   return (
     <div className="AddRecipe">
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='addRecipe'>
 
       <h3>Add Recipe</h3>
       

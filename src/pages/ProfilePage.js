@@ -168,12 +168,12 @@ return (
  <h2 className='myRecipeTitle'>My Recipes</h2>
 
 <button onClick={()=> setDisplayForm(!displayForm)} className='showFormToggleProfile'>{displayForm ? 'Hide Add Recipe Form' : 'Click to Add Recipe'}</button>
+
+
 <div className='addRecipeProfile'>
 {displayForm && <AddRecipe refreshRecipes={getMyRecipes}/>}
 
 <SearchBar setQueryProp={setQuery} id='profileSearch'/>
-
-
 
   
 <p>Course Type:</p>
