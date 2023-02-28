@@ -861,10 +861,13 @@ margin-left: 600px;
     }
   } 
 
-  @media (max-width: 1002px) {
-    .myRecipeTitle {
-      display: none;
+  @media (min-width: 1003px) {
+    #profileRecipes{
+      color: red;
     }
+  } 
+
+  @media (max-width: 1002px) {
     #userInfo{
       display: inline-block;
       vertical-align: top;
@@ -880,6 +883,9 @@ margin-left: 600px;
     .showFormToggleProfile{
       margin-top: 0px;
       margin-left: 250px;
+    }
+    .myRecipesTitle{
+      display: none;
     }
   } 
 
