@@ -4,7 +4,7 @@ const storedToken = localStorage.getItem('authToken');
 
 const api = axios.create({
   
-  baseURL: "http://localhost:5005/api" || process.env.REACT_APP_API_URL,
+  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5005",
   headers:  { Authorization: `Bearer ${storedToken}` } 
   
 });
@@ -21,7 +21,7 @@ const getRecipes = () => {
  
 const uploadImage = (file) => {
   const storedToken = localStorage.getItem('authToken');
-  return api.post("/upload", file, { Authorization: `Bearer ${storedToken}` } )
+  return api.post("/api/upload", file, { Authorization: `Bearer ${storedToken}` } )
     .then(res => res.data)
     .catch(errorHandler);
 };
