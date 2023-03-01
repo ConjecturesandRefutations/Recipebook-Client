@@ -497,7 +497,6 @@ color: white;
  display: flex;
  flex-direction: row;
  position: absolute;
- margin-left: 5vw;
  background-color: whitesmoke;
  border-radius: 5px;
  padding: 0 5px 0 5px;  
@@ -937,5 +936,26 @@ margin-left: 600px;
   @media (min-width: 1002px) {
     .myRecipes {
       margin-left: 0px;
+    }
+  } 
+
+
+  @media (max-width: 1000px) {
+    .creatorDetails {
+      margin-left: 0px;
+    }
+  } 
+
+  @media (max-width: 800px) {
+    .creatorDetails {
+      position: relative;
+      margin-left: 30vw;
+      flex-direction: row;
+      padding: 0px;
+      font-size: x-small;
+      background-color: white;
+    }
+    #creatorImage{
+      height: 5vh;
     }
   } 
