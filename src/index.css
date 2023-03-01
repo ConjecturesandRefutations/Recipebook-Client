@@ -1,5 +1,5 @@
 *{
-  font-family: Segoe UI;
+  font-family: Segoe UI, Helvetica, sans-serif;
 }
 
 body {
@@ -737,66 +737,8 @@ margin-left: 600px;
     padding: 0px;
     font-size: 1rem;
   }
-}/* 
+}
 
-  @media (max-width: 1016px) {
-    .recipeCard {
-      width: 80%;
-      height: 80%;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0px;
-    }
-    .recipePic{
-      height: 172px;
-    width: 150px;
-    justify-content: center;
-    }
-    .recipeName{
-      font-size: small;
-    }
-    #table {
-      padding: 0px;
-    }
-    .recipeList{
-       display: flex; 
-      flex-wrap: wrap;
-      margin: 0;
-      padding: 0;
-    }
-  }
-
-  @media (max-width: 766px) {
-    .recipeCard {
-      width: 70%;
-      height: 70%;
-      margin: 0px;
-      padding: 0px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .recipePic{
-      height: 100px;
-    width: 70px;
-    justify-content: center;
-      margin-bottom: -20px;
-    }
-    .recipeName{
-      font-size: x-small;
-      position: absolute;
-      top: 0px;
-    }
-    .recipeList{
-      display: flex; 
-     flex-wrap: wrap;
-     margin: 0px;
-   }
-  }
- */
    @media (max-width: 1009px) {
     .veggieCheckboxes {
       margin-left: 29vw;
