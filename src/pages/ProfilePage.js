@@ -13,7 +13,7 @@ import { ThemeContext } from './../context/theme.context';
 import defaultProfile from '../images/defaultProfile.jpg';
 import noRecipes from '../images/hungry.jpg'
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
 
 const ProfilePage = () => {
   const { theme } = useContext(ThemeContext);
@@ -28,6 +28,7 @@ const ProfilePage = () => {
   const [courseType, setCourseType] = useState('');
 
   const [loading, setLoading] = useState(true);
+  const [imgLoading, setimgLoading] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
   const [imageUrl, setImageUrl] = useState("");
@@ -92,6 +93,7 @@ const deleteUser = () => {
 };
 
 const handleFileUpload = (e) => {
+  console.log("handleFileUpload called");
   const storedToken = localStorage.getItem('authToken');
   const uploadData = new FormData();
    
@@ -103,6 +105,7 @@ const handleFileUpload = (e) => {
   })
   .then(response => {
     setImageUrl(response.data.fileUrl);
+    setimgLoading(true)
     axios.put(`${API_URL}/api/users`, { image: response.data.fileUrl }, {
       headers: { Authorization: `Bearer ${storedToken}` },
     })
@@ -111,6 +114,7 @@ const handleFileUpload = (e) => {
         ...user,
         image: response.data.image,
       });
+      setimgLoading(false)
     })
     .catch(err => console.log(err))
   })
@@ -142,6 +146,7 @@ return (
 
  <section id='userInfo'>
  <img alt='profile_image' src={user.image ? user.image : defaultProfile} id='defaultProfilePic'/>
+ {imgLoading ? <ClipLoader color="#36d7b7" className="clipLoader"/> : null}
  <form onSubmit={handleSubmit} className='uploadimage'>
                             <input type="file" name="imageUrl" onChange={(e) => handleFileUpload(e)} />
                             
