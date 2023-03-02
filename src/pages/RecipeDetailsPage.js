@@ -104,8 +104,6 @@ function RecipeDetailsPage (props) {
   return (
     <div className={"RecipeDetails " + theme}>
 
-{console.log(creatorImage)}
-
 {loading ? <ClipLoader color="#36d7b7" /> : null}
 
       {recipe && (

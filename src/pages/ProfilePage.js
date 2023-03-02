@@ -92,7 +92,6 @@ const deleteUser = () => {
 };
 
 const handleFileUpload = (e) => {
-  console.log("handleFileUpload called");
   const storedToken = localStorage.getItem('authToken');
   const uploadData = new FormData();
    

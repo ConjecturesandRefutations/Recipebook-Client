@@ -20,7 +20,6 @@ function AddRecipe(props) {
 
     // ******** this function handles the file upload ********
     const handleFileUpload = (e) => {
-       /* console.log("The file to be uploaded is: ", e.target.files[0]); */
     
        e.preventDefault();
   
@@ -31,8 +30,6 @@ function AddRecipe(props) {
       service
         .uploadImage(uploadData)
         .then((response) => {
-           console.log("response is: ", response);
-          // response carries "fileUrl" which we can use to update the state
           setImgUrl(response.fileUrl);
         
         })
@@ -60,7 +57,7 @@ function AddRecipe(props) {
         setImgUrl("");
         setIsVegetarian(false)
         setIsVegan(false)
-        setCourseType("other");
+        setCourseType("Other");
         props.refreshRecipes();
       })
       .catch((error) => console.log(error));

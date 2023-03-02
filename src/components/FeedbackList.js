@@ -68,8 +68,6 @@ const getMyRecipes = () => {
     getMyRecipes();
   },  [] );
 
-  console.log((myRecipes.map((recipe)=> recipe._id)).includes(recipeId))
-
 return (
     <div>
 

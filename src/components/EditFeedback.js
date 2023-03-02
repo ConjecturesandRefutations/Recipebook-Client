@@ -29,7 +29,6 @@ function EditFeedback(props) {
         { headers: { Authorization: `Bearer ${storedToken}` } }
         )
         .then((response) => {
-            console.log(response);
             refreshFeedback();
         })
         .catch((error) => console.log(error));
