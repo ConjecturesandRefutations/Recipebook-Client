@@ -79,7 +79,7 @@ function changeSmallLogoSrc(theme){
   
       <img src={changeSmallLogoSrc(theme)} alt="recipeLogo" className="smallLogoSL"/>
     
-      <h1>Login</h1>
+      <h1 className="loginTitle">Login</h1>
 
       <form onSubmit={handleLoginSubmit} className='loginSignupForm'>
         <label>Email:</label>

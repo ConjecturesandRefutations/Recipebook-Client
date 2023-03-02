@@ -38,7 +38,6 @@ function RandomRecipe() {
     },  [] )
 
     const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)]
-    console.log(randomRecipe)
     
 
 return(

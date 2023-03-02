@@ -246,6 +246,10 @@ textarea {
   padding-top: 20px;
 }
 
+.loginTitle{
+  font-size: xx-large;
+}
+
  .loginSignupForm{
   background-color: rgb(180, 148, 255);
   margin-top: 10px;  
