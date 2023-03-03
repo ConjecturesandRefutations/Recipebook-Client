@@ -905,3 +905,33 @@ margin-left: 600px;
       height: 5vh;
     }
   } 
+
+  @media (max-width: 400px) {
+    .searchBar {
+      max-width: 370px;
+    }
+  } 
+
+  @media (max-width: 380px) {
+    .searchBar {
+      max-width: 350px;
+    }
+  } 
+
+  @media (max-width: 355px) {
+    .searchBar {
+      max-width: 310px;
+    }
+  } 
+
+  @media (max-width: 330px) {
+    .searchBar {
+      max-width: 300px;
+    }
+  } 
+
+  @media (max-width: 300px) {
+    .searchBar {
+      max-width: 280px;
+    }
+  } 
