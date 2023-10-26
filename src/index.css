@@ -260,6 +260,11 @@ textarea {
   border-radius: 5px;
 } 
 
+.loginSignupForm > label {
+  margin-left: 50%;
+  transform: translate(-50%);
+}
+
 .loginSignupButton{
   background-color: gray;
 }
